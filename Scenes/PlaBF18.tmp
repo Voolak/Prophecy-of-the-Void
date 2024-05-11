@@ -7,10 +7,9 @@
 size = Vector2(118, 118)
 
 [node name="Player" type="RigidBody2D"]
-linear_damp = 1.0
-angular_damp = 2.0
 script = ExtResource("1_p5byr")
 engine_power = 100
+spin_power = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ugyxq")

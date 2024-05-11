@@ -1,10 +1,22 @@
-extends CharacterBody2D
+extends RigidBody2D
 
-var SPEED = 400  # speed in pixels/sec
-var ACCELERATION = 0
+@export var engine_power = 800
+@export var spin_power = 10000
 
-func _physics_process(delta):
-	var direction = Input.get_vector("left", "right", "up", "down")
-	velocity = direction * SPEED
+var thrust = Vector2.ZERO
+var rotation_dir = 0
 
-	move_and_slide()
+func get_input():
+	thrust = Vector2.ZERO
+	if Input.is_action_pressed("up"):
+		thrust.y -= engine_power  # Move up
+	if Input.is_action_pressed("down"):
+		thrust.y += engine_power  # Move down
+	if Input.is_action_pressed("left"):
+		thrust.x -= engine_power  # Move left
+	if Input.is_action_pressed("right"):
+		thrust.x += engine_power  # Move right
+
+func _physics_process(_delta):
+	get_input()
+	constant_force = thrust.rotated(rotation)  # Apply force in the direction of the ship
