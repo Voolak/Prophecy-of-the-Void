@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://u27kcrxugmxc"]
+[gd_scene load_steps=5 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
-[ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
+[ext_resource type="PackedScene" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
-[ext_resource type="PackedScene" uid="uid://csye76vi2xi8y" path="res://Scenes/Enemy.tscn" id="4_ettud"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemy.tscn" id="4_ettud"]
 
 [node name="LevelModel" type="Node2D"]
 
