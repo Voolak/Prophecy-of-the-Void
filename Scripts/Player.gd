@@ -1,10 +1,15 @@
 extends RigidBody2D
 
+@onready var screensize = get_viewport_rect().size
+
 @export var engine_power = 800
 @export var rotation_speed = 5.0
+
 var SHOOT_THRUST = 5000
 
 var thrust = Vector2.ZERO
+
+
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -56,7 +61,7 @@ func shoot():
 	
 func _integrate_forces(state):
 	var xform = state.transform
-	#xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
-	#xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
+	xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
+	xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
 	state.transform = xform
 	
