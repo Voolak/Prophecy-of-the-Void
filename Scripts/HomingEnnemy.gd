@@ -1,13 +1,12 @@
 extends Area2D
 
 @export var speed = 200
-@export var steer_force = 500.0
+@export var steer_force = 250.0
 
 var velocity = Vector2.ZERO
-var player = null
+@onready var player = %Player
 
-func _ready():
-	player = get_node("../Player")
+@onready var screensize = get_viewport_rect().size
 
 func seek():
 	var steer = Vector2.ZERO
@@ -21,7 +20,10 @@ func _physics_process(delta):
 	velocity += acceleration * delta
 	velocity = velocity.normalized() * speed
 	global_transform = global_transform.translated(velocity * delta)
+	position.x = wrapf(position.x, 0, screensize.x)
+	position.y = wrapf(position.y, 0, screensize.y)
 	rotation = velocity.angle()
 
 func _on_body_entered(body):
 	queue_free()
+

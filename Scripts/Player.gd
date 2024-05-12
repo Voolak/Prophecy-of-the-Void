@@ -12,9 +12,6 @@ var SHOOT_THRUST = 25000
 
 var thrust = Vector2.ZERO
 
-
-
-
 func get_input():
 	thrust = Vector2.ZERO
 	if Input.is_action_pressed("up"):
@@ -73,8 +70,3 @@ func _integrate_forces(state):
 	xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
 	xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
 	state.transform = xform
-	
-
-
-func _on_shooting_timer_timeout():
-	pass # Replace with function body.
