@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @export var engine_power = 800
 @export var rotation_speed = 5.0
+var SHOOT_THRUST = 5000
 
 var thrust = Vector2.ZERO
 
@@ -29,6 +30,11 @@ func _physics_process(_delta):
 	var current_angle = $Sprite2D.rotation
 	var new_angle = lerp_angle(current_angle, target_angle, rotation_speed * _delta)
 	$Sprite2D.rotation = new_angle
+	
+	# shoot
+	if Input.is_action_pressed("shoot"):
+		shoot()
+
 
 func lerp_angle(a, b, t):
 	var angle_diff = (b - a + PI) % (2 * PI) - PI
@@ -41,3 +47,16 @@ func clamp(value, min, max):
 		return max
 	else:
 		return value
+		
+func shoot():
+	var current_angle = $Sprite2D.rotation
+	var thrust_angle = current_angle + PI
+	var direction = Vector2(cos(thrust_angle), sin(thrust_angle))
+	constant_force = SHOOT_THRUST * direction
+	
+func _integrate_forces(state):
+	var xform = state.transform
+	#xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
+	#xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
+	state.transform = xform
+	
