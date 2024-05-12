@@ -11,11 +11,11 @@
 [node name="GameManager" parent="." instance=ExtResource("1_cmnsn")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(960, 540)
 
 [node name="Player" parent="." instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
-position = Vector2(578, 323)
+position = Vector2(748, 595)
 
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_kkc0p")
@@ -24,4 +24,4 @@ script = ExtResource("3_kkc0p")
 position = Vector2(378, 325)
 
 [node name="HomingEnnemy" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(1007, 553)
+position = Vector2(1522, 698)
