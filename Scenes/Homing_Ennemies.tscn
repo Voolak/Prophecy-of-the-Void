@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://sfu3go1mbjcs"]
+
+[ext_resource type="Script" path="res://Scripts/HomingEnnemy.gd" id="1_q4556"]
+[ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_x1lp0"]
+[ext_resource type="PackedScene" path="res://Scenes/KillZone.tscn" id="3_wcflr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hovq"]
+size = Vector2(132, 130)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i6o4j"]
+blend_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trjx3"]
+size = Vector2(116, 118)
+
+[node name="HomingEnnemy" type="Area2D"]
+script = ExtResource("1_q4556")
+
+[node name="EnemyHitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5hovq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_i6o4j")
+texture = ExtResource("2_x1lp0")
+
+[node name="KillZone" parent="." instance=ExtResource("3_wcflr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("RectangleShape2D_trjx3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
