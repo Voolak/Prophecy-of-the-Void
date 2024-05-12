@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2i0ibutk1w5h"]
+[gd_scene load_steps=5 format=3 uid="uid://d2i0ibutk1w5h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_p5byr"]
 [ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_ugyxq"]
+[ext_resource type="PackedScene" uid="uid://dfautewc7ckgr" path="res://Scenes/Bullet.tscn" id="2_w0iyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26naw"]
 size = Vector2(118, 118)
@@ -11,9 +12,23 @@ linear_damp = 1.0
 angular_damp = 2.0
 script = ExtResource("1_p5byr")
 engine_power = 100
+Bullet = ExtResource("2_w0iyx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ugyxq")
 
+[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+position = Vector2(64, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Marker2D"]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.230469, 0.230469)
+texture = ExtResource("2_ugyxq")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_26naw")
+
+[node name="ShootingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]

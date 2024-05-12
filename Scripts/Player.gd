@@ -1,13 +1,17 @@
 extends RigidBody2D
 
 @onready var screensize = get_viewport_rect().size
+@onready var shooting_timer = $ShootingTimer
 
 @export var engine_power = 800
 @export var rotation_speed = 5.0
 
-var SHOOT_THRUST = 5000
+@export var Bullet : PackedScene
+
+var SHOOT_THRUST = 25000
 
 var thrust = Vector2.ZERO
+
 
 
 
@@ -37,8 +41,9 @@ func _physics_process(_delta):
 	$Sprite2D.rotation = new_angle
 	
 	# shoot
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed("shoot") && shooting_timer.is_stopped():
 		shoot()
+		shooting_timer.start()
 
 
 func lerp_angle(a, b, t):
@@ -59,9 +64,17 @@ func shoot():
 	var direction = Vector2(cos(thrust_angle), sin(thrust_angle))
 	constant_force = SHOOT_THRUST * direction
 	
+	var b = Bullet.instantiate()
+	owner.add_child(b)
+	b.transform = $Sprite2D/Marker2D.global_transform
+	
 func _integrate_forces(state):
 	var xform = state.transform
 	xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
 	xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
 	state.transform = xform
 	
+
+
+func _on_shooting_timer_timeout():
+	pass # Replace with function body.
