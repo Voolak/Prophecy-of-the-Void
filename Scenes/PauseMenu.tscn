@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c7i251naibekr"]
+[gd_scene format=3 uid="uid://c4u75bhoaj37n"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
