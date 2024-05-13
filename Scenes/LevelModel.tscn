@@ -10,11 +10,11 @@
 [node name="GameManager" parent="." instance=ExtResource("1_cmnsn")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(960, 540)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
-position = Vector2(578, 323)
+position = Vector2(748, 595)
 
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_kkc0p")
