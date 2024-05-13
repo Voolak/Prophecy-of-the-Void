@@ -1,9 +1,10 @@
-extends Area2D
+extends Node2D
 
 @export var speed = 200
 @export var steer_force = 250.0
 
 var velocity = Vector2.ZERO
+@export var hp = 1
 @onready var player = %Player
 
 @onready var screensize = get_viewport_rect().size
@@ -24,6 +25,8 @@ func _physics_process(delta):
 	position.y = wrapf(position.y, 0, screensize.y)
 	rotation = velocity.angle()
 
-func _on_body_entered(body):
-	queue_free()
 
+# on bullet enter
+func _on_hit_box_area_entered(area):
+	hp -= 1
+	area.queue_free()	#delete bullet

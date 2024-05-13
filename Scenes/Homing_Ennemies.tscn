@@ -1,31 +1,81 @@
-[gd_scene load_steps=7 format=3 uid="uid://sfu3go1mbjcs"]
+[gd_scene load_steps=12 format=3 uid="uid://sfu3go1mbjcs"]
 
 [ext_resource type="Script" path="res://Scripts/HomingEnnemy.gd" id="1_q4556"]
 [ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_x1lp0"]
-[ext_resource type="PackedScene" path="res://Scenes/KillZone.tscn" id="3_wcflr"]
+[ext_resource type="Texture2D" uid="uid://sxok02jjxnuc" path="res://Assets/Sprites/lunar_rabbit.png" id="2_xxym7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hovq"]
-size = Vector2(132, 130)
+[sub_resource type="AtlasTexture" id="AtlasTexture_88irr"]
+atlas = ExtResource("2_xxym7")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnkyy"]
+atlas = ExtResource("2_xxym7")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4y74"]
+atlas = ExtResource("2_xxym7")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppkyx"]
+atlas = ExtResource("2_xxym7")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dh0kt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88irr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnkyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4y74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppkyx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i6o4j"]
 blend_mode = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_trjx3"]
-size = Vector2(116, 118)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8ogp"]
+size = Vector2(90, 88)
 
-[node name="HomingEnnemy" type="Area2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7jh8"]
+radius = 42.0
+
+[node name="HomingEnnemy" type="Node2D"]
 script = ExtResource("1_q4556")
 
-[node name="EnemyHitBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_5hovq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dh0kt")
+autoplay = "default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_i6o4j")
 texture = ExtResource("2_x1lp0")
 
-[node name="KillZone" parent="." instance=ExtResource("3_wcflr")]
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0.5, 0)
+collision_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
-shape = SubResource("RectangleShape2D_trjx3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(2.5, 4)
+shape = SubResource("RectangleShape2D_x8ogp")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(3, 5)
+shape = SubResource("CircleShape2D_u7jh8")
+debug_color = Color(0.997488, 0, 0.164827, 0.42)
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

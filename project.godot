@@ -47,6 +47,15 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Projectile"
+2d_render/layer_3="Enemy"
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Projectile"
+2d_physics/layer_3="Enemy"
+
 [physics]
 
 2d/default_gravity=0.0

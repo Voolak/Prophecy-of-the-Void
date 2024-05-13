@@ -4,8 +4,9 @@ extends Area2D
 @export var HIT_DAMAGE: int
 
 func _on_body_entered(body):
-	timer.start()
-	print("collision")
+	#timer.start()
+	print("collision") 
+	print(body.hp)
 
 
 func _on_timer_timeout():

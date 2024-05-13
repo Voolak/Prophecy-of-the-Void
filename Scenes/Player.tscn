@@ -8,6 +8,7 @@
 size = Vector2(118, 118)
 
 [node name="Player" type="RigidBody2D"]
+collision_mask = 4
 linear_damp = 1.0
 angular_damp = 2.0
 script = ExtResource("1_p5byr")
@@ -25,10 +26,14 @@ position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.230469, 0.230469)
 texture = ExtResource("2_ugyxq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_26naw")
-
 [node name="ShootingTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_26naw")
+
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
