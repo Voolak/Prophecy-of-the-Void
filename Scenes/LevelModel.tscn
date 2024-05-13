@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=6 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/Homing_Ennemies.tscn" id="5_1ny0w"]
+[ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/EnemySpawn.tscn" id="5_foc04"]
 
 [node name="LevelModel" type="Node2D"]
 
@@ -24,3 +25,5 @@ position = Vector2(1007, 553)
 
 [node name="HomingEnnemy2" parent="Enemies" instance=ExtResource("5_1ny0w")]
 position = Vector2(859, 196)
+
+[node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]

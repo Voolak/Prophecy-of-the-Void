@@ -1,3 +1,4 @@
+class_name HomingEnemy
 extends Node2D
 
 @export var speed = 200
@@ -11,6 +12,7 @@ var velocity = Vector2.ZERO
 
 func seek():
 	var steer = Vector2.ZERO
+	player = get_tree().get_first_node_in_group("player")
 	if player:
 		var desired = (player.global_position - global_position).normalized() * speed
 		steer = (desired - velocity).normalized() * steer_force

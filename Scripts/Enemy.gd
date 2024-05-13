@@ -1,6 +1,10 @@
+class_name Enemy
 extends Node2D
 
 @export var hp : int
+@export var speed : int
+
+var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
