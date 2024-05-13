@@ -21,9 +21,11 @@ position = Vector2(748, 595)
 script = ExtResource("3_kkc0p")
 
 [node name="HomingEnnemy" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(1007, 553)
+position = Vector2(1256, 580)
 
 [node name="HomingEnnemy2" parent="Enemies" instance=ExtResource("5_1ny0w")]
 position = Vector2(859, 196)
 
 [node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
+position = Vector2(-19.3601, 13.8096)
+scale = Vector2(1.01504, 1.02486)
