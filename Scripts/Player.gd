@@ -4,11 +4,13 @@ extends RigidBody2D
 @onready var shooting_timer = $ShootingTimer
 @onready var marker_2d = $Sprite2D/Marker2D
 
+@onready var animation_player = $AnimationPlayer
+
 @export var engine_power = 800
 @export var rotation_speed = 5.0
 
 @export var Bullet : PackedScene
-@export var hp = 5
+@export var hp = 1
 
 var SHOOT_THRUST = 25000
 var thrust = Vector2.ZERO
@@ -75,4 +77,5 @@ func _integrate_forces(state):
 
 func _on_hit_box_area_entered(area):
 	hp -= 1
-	print(hp)
+	if hp == 0:
+		animation_player.play("death")

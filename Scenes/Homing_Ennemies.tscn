@@ -167,6 +167,7 @@ script = ExtResource("1_q4556")
 material = SubResource("ShaderMaterial_hdlfd")
 sprite_frames = SubResource("SpriteFrames_dh0kt")
 autoplay = "default"
+frame_progress = 0.907483
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0.5, 0)

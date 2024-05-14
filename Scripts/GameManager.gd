@@ -9,10 +9,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if player.hp == 0:
-		timer.start()
-		player.queue_free()
+#func _process(delta):
+	#if player.hp == 0:
+		#timer.start()
+		#player.queue_free()
 	
 	#for enemy in get_tree().get_nodes_in_group("enemies"):
 		#if enemy.hp <= 0:
