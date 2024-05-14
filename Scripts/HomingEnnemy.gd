@@ -3,11 +3,11 @@ extends Node2D
 
 @export var speed = 200
 @export var steer_force = 250.0
+@export var hp = 1
 
 var velocity = Vector2.ZERO
-@export var hp = 1
-@onready var player = %Player
 
+@onready var player = %Player
 @onready var screensize = get_viewport_rect().size
 
 func seek():
@@ -26,7 +26,6 @@ func _physics_process(delta):
 	position.x = wrapf(position.x, 0, screensize.x)
 	position.y = wrapf(position.y, 0, screensize.y)
 	rotation = velocity.angle()
-
 
 # on bullet enter
 func _on_hit_box_area_entered(area):

@@ -5,20 +5,20 @@
 
 [sub_resource type="Curve2D" id="Curve2D_yhlli"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 2018, -113, 0, 0, 0, 0, 2015, 1168, 0, 0, 0, 0, -109, 1174, 0, 0, 0, 0, -90, -107)
+"points": PackedVector2Array(0, 0, 0, 0, 3096.78, -109.097, 0, 0, 0, 0, 3093.83, 1728.43, 0, 0, 0, 0, -137.571, 1735.06, 0, 0, 0, 0, -131.653, -102.473)
 }
 point_count = 4
 
 [node name="EnemySpawn" type="Path2D"]
-position = Vector2(136.038, 138.201)
-scale = Vector2(0.844382, 0.745144)
+position = Vector2(-19.5153, -20.8003)
+scale = Vector2(1.03197, 1.06371)
 curve = SubResource("Curve2D_yhlli")
 script = ExtResource("1_bgkq2")
 Enemy = ExtResource("2_ldcyx")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(-90, -107)
-rotation = -0.00284629
+position = Vector2(3096.78, -109.097)
+rotation = 1.57241
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
