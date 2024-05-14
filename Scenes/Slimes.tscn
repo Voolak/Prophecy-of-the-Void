@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://3216u18yillk"]
+[gd_scene load_steps=20 format=3 uid="uid://3216u18yillk"]
 
 [ext_resource type="Script" path="res://Scripts/Slimes.gd" id="1_caepv"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="2_5drgn"]
@@ -180,14 +180,44 @@ tracks/3/keys = {
 "values": [1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_hxa0d"]
+resource_name = "scaling"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lo7og"]
 _data = {
 "RESET": SubResource("Animation_d24kd"),
-"death": SubResource("Animation_n8md7")
+"death": SubResource("Animation_n8md7"),
+"scaling": SubResource("Animation_hxa0d")
 }
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_caepv")
+speed = null
+hp = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_hdlfd")
@@ -217,7 +247,7 @@ shape = SubResource("RectangleShape2D_viafm")
 libraries = {
 "": SubResource("AnimationLibrary_lo7og")
 }
-autoplay = "spawn"
+autoplay = "scaling"
 
 [node name="ScalingTimer" type="Timer" parent="."]
 wait_time = 5.0

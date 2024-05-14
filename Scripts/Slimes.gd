@@ -4,12 +4,16 @@ extends Node2D
 @export var hp = 1
 
 var velocity = Vector2.LEFT
+var direction = randi() % 4
 
 @onready var player = %Player
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
 @onready var scaling_timer = $ScalingTimer
 
+func _ready():
+	animation_player.play("scaling")
+	
 
 func _physics_process(delta):
 	velocity = velocity.normalized() * speed
@@ -27,6 +31,9 @@ func _on_hit_box_area_entered(area):
 		$".".animation_player.play("death")
 	area.queue_free()	#delete bullet
 
+func _multiply(){
+	
+}
 
 func _on_scaling_timer_timeout():
 	pass # Replace with function body.
