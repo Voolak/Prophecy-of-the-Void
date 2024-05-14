@@ -1,4 +1,3 @@
-class_name HomingEnemy
 extends Node2D
 
 @export var speed = 200
@@ -9,6 +8,7 @@ var velocity = Vector2.ZERO
 @onready var player = %Player
 
 @onready var screensize = get_viewport_rect().size
+@onready var animation_player = $AnimationPlayer
 
 func seek():
 	var steer = Vector2.ZERO
@@ -32,5 +32,5 @@ func _physics_process(delta):
 func _on_hit_box_area_entered(area):
 	hp -= 1
 	if hp <= 0:
-		queue_free()
+		$".".animation_player.play("death")
 	area.queue_free()	#delete bullet

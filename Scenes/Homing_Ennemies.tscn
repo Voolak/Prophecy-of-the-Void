@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sfu3go1mbjcs"]
+[gd_scene load_steps=17 format=3 uid="uid://sfu3go1mbjcs"]
 
 [ext_resource type="Script" path="res://Scripts/HomingEnnemy.gd" id="1_q4556"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="2_7500c"]
@@ -13,6 +13,7 @@ height = 96
 noise = SubResource("FastNoiseLite_k10wo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdlfd"]
+resource_local_to_scene = true
 shader = ExtResource("2_7500c")
 shader_parameter/dissolve_value = 1.0
 shader_parameter/burn_size = 0.1
@@ -61,6 +62,104 @@ size = Vector2(90, 88)
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7jh8"]
 radius = 42.0
 
+[sub_resource type="Animation" id="Animation_n8md7"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtBox/HurtBoxCollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/HitBoxCollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_d24kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtBox/HurtBoxCollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/HitBoxCollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/dissolve_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lo7og"]
+_data = {
+"RESET": SubResource("Animation_d24kd"),
+"death": SubResource("Animation_n8md7")
+}
+
 [node name="HomingEnemy" type="Node2D"]
 script = ExtResource("1_q4556")
 
@@ -73,7 +172,7 @@ autoplay = "default"
 position = Vector2(0.5, 0)
 collision_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="HurtBoxCollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(2.5, 4)
 shape = SubResource("RectangleShape2D_x8ogp")
 
@@ -81,9 +180,14 @@ shape = SubResource("RectangleShape2D_x8ogp")
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBoxCollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(3, 5)
 shape = SubResource("CircleShape2D_u7jh8")
 debug_color = Color(0.997488, 0, 0.164827, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lo7og")
+}
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
