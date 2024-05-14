@@ -1,7 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://sfu3go1mbjcs"]
+[gd_scene load_steps=14 format=3 uid="uid://sfu3go1mbjcs"]
 
 [ext_resource type="Script" path="res://Scripts/HomingEnnemy.gd" id="1_q4556"]
+[ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="2_7500c"]
 [ext_resource type="Texture2D" uid="uid://sxok02jjxnuc" path="res://Assets/Sprites/lunar_rabbit.png" id="2_xxym7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k10wo"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vh0dq"]
+width = 96
+height = 96
+noise = SubResource("FastNoiseLite_k10wo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdlfd"]
+shader = ExtResource("2_7500c")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.1
+shader_parameter/burn_color = Color(0.52549, 0, 0, 1)
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vh0dq")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88irr"]
 atlas = ExtResource("2_xxym7")
@@ -49,6 +65,7 @@ radius = 42.0
 script = ExtResource("1_q4556")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_hdlfd")
 sprite_frames = SubResource("SpriteFrames_dh0kt")
 autoplay = "default"
 

@@ -14,9 +14,9 @@ func _process(delta):
 		timer.start()
 		player.queue_free()
 	
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if enemy.hp <= 0:
-			enemy.queue_free()
+	#for enemy in get_tree().get_nodes_in_group("enemies"):
+		#if enemy.hp <= 0:
+			#enemy.queue_free()
 
 
 func _on_timer_timeout():

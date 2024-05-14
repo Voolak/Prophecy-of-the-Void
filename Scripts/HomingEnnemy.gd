@@ -31,4 +31,6 @@ func _physics_process(delta):
 # on bullet enter
 func _on_hit_box_area_entered(area):
 	hp -= 1
+	if hp <= 0:
+		queue_free()
 	area.queue_free()	#delete bullet
