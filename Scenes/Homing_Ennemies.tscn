@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://sfu3go1mbjcs"]
+[gd_scene load_steps=18 format=3 uid="uid://sfu3go1mbjcs"]
 
 [ext_resource type="Script" path="res://Scripts/HomingEnnemy.gd" id="1_q4556"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="2_7500c"]
 [ext_resource type="Texture2D" uid="uid://sxok02jjxnuc" path="res://Assets/Sprites/lunar_rabbit.png" id="2_xxym7"]
+[ext_resource type="Texture2D" uid="uid://lk2lw22omk60" path="res://Assets/Sprites/poussin.png" id="4_undus"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k10wo"]
 frequency = 0.1
@@ -190,5 +191,11 @@ debug_color = Color(0.997488, 0, 0.164827, 0.42)
 libraries = {
 "": SubResource("AnimationLibrary_lo7og")
 }
+
+[node name="indicator" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(1, -199)
+scale = Vector2(0.109375, 0.101563)
+texture = ExtResource("4_undus")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

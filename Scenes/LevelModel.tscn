@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/EnemySpawn.tscn" id="5_foc04"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
-size = Vector2(1825, 1008)
+size = Vector2(1757, 939)
 
 [node name="LevelModel" type="Node2D"]
 
@@ -20,16 +20,16 @@ collision_mask = 4
 script = ExtResource("2_evsbq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
-position = Vector2(962.5, 536)
+position = Vector2(969.5, 546.5)
 shape = SubResource("RectangleShape2D_ru7ca")
 debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
 position = Vector2(748, 595)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
 
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_kkc0p")
@@ -43,5 +43,6 @@ position = Vector2(859, 196)
 [node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
 position = Vector2(-83.2546, -49.5216)
 scale = Vector2(0.681434, 0.774339)
+nb_enemies = 10
 
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]

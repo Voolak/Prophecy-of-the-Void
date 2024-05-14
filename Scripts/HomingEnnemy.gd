@@ -10,6 +10,7 @@ var canWarp = false
 @onready var player = %Player
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
+@onready var indicator = $indicator
 
 func seek():
 	var steer = Vector2.ZERO
@@ -28,6 +29,8 @@ func _physics_process(delta):
 		position.x = wrapf(position.x, 0, screensize.x)
 		position.y = wrapf(position.y, 0, screensize.y)
 	rotation = velocity.angle()
+	# display the indicator if outside camera
+	display_indicator()
 
 # on bullet enter
 func _on_hit_box_area_entered(area):
@@ -38,3 +41,16 @@ func _on_hit_box_area_entered(area):
 	
 func enable_wrap():
 	canWarp = true
+	
+# (0, 0) if in screen ; -1 if dim above or left ; 1 if dim below or right
+func is_in_camera():
+	return position.x >= 0 && position.x < screensize.x && \
+		   position.y >= 0 && position.y < screensize.y
+	
+func display_indicator():
+	if is_in_camera():
+		indicator.visible = false
+	else :
+		indicator.visible = true
+		indicator.global_position.x = clamp(global_position.x, 0, screensize.x)
+		indicator.global_position.y = clamp(global_position.y, 0, screensize.y)
