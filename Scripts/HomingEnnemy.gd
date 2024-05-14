@@ -3,6 +3,7 @@ extends Node2D
 @export var speed = 200
 @export var steer_force = 250.0
 @export var hp = 1
+@export var push_force = 15000
 
 var velocity = Vector2.ZERO
 var canWarp = false
@@ -21,7 +22,6 @@ func seek():
 	return steer
 
 func _physics_process(delta):
-	print(global_position)
 	var acceleration = seek()
 	velocity += acceleration * delta
 	velocity = velocity.normalized() * speed

@@ -34,6 +34,7 @@ debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
 position = Vector2(748, 595)
+hp = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -50,10 +51,12 @@ position = Vector2(859, 196)
 [node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
 position = Vector2(-83.2546, -49.5216)
 scale = Vector2(0.681434, 0.774339)
-enemies_left = 5
-simultaneous_enemies = 2
+enemies_left = 2
+simultaneous_enemies = 1
 
 [node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
+enemies_left = 2
+simultaneous_enemies = 1
 Enemy = ExtResource("5_1ny0w")
 
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]

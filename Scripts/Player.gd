@@ -75,7 +75,10 @@ func _integrate_forces(state):
 	state.transform = xform
 
 
-func _on_hit_box_area_entered(area):
+func _on_hit_box_area_entered(enemy):
 	hp -= 1
+	var push_direction = (global_position - enemy.global_position).normalized()
+	print(enemy.get_parent().push_force * push_direction)
+	apply_central_force(enemy.get_parent().push_force * push_direction)
 	if hp == 0:
 		animation_player.play("death")
