@@ -21,6 +21,7 @@ func seek():
 	return steer
 
 func _physics_process(delta):
+	print(global_position)
 	var acceleration = seek()
 	velocity += acceleration * delta
 	velocity = velocity.normalized() * speed

@@ -1,16 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=10 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
+[ext_resource type="Texture2D" uid="uid://b2hnyjxrt4tcl" path="res://Assets/Sprites/background1.png" id="1_oellx"]
 [ext_resource type="Script" path="res://WarpZone.gd" id="2_evsbq"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/Homing_Ennemies.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/EnemySpawn.tscn" id="5_foc04"]
+[ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
 size = Vector2(1757, 939)
 
 [node name="LevelModel" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(988, 503)
+scale = Vector2(1.03814, 1.03841)
+texture = ExtResource("1_oellx")
 
 [node name="GameManager" parent="." instance=ExtResource("1_cmnsn")]
 
@@ -43,6 +50,10 @@ position = Vector2(859, 196)
 [node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
 position = Vector2(-83.2546, -49.5216)
 scale = Vector2(0.681434, 0.774339)
-nb_enemies = 10
+enemies_left = 5
+simultaneous_enemies = 2
+
+[node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
+Enemy = ExtResource("5_1ny0w")
 
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]

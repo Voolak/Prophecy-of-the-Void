@@ -18,7 +18,7 @@ Enemy = ExtResource("2_ldcyx")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 position = Vector2(3096.78, -109.097)
-rotation = 1.57241
+rotation = 1.5724
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
