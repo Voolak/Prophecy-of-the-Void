@@ -18,6 +18,3 @@ func _ready():
 		#if enemy.hp <= 0:
 			#enemy.queue_free()
 
-
-func _on_timer_timeout():
-	get_tree().reload_current_scene()

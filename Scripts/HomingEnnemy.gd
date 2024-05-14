@@ -5,6 +5,7 @@ extends Node2D
 @export var hp = 1
 
 var velocity = Vector2.ZERO
+var canWarp = false
 
 @onready var player = %Player
 @onready var screensize = get_viewport_rect().size
@@ -23,8 +24,9 @@ func _physics_process(delta):
 	velocity += acceleration * delta
 	velocity = velocity.normalized() * speed
 	global_transform = global_transform.translated(velocity * delta)
-	position.x = wrapf(position.x, 0, screensize.x)
-	position.y = wrapf(position.y, 0, screensize.y)
+	if canWarp :
+		position.x = wrapf(position.x, 0, screensize.x)
+		position.y = wrapf(position.y, 0, screensize.y)
 	rotation = velocity.angle()
 
 # on bullet enter
@@ -33,3 +35,6 @@ func _on_hit_box_area_entered(area):
 	if hp <= 0:
 		$".".animation_player.play("death")
 	area.queue_free()	#delete bullet
+	
+func enable_wrap():
+	canWarp = true
