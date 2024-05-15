@@ -16,6 +16,9 @@ extends RigidBody2D
 var SHOOT_THRUST = 25000
 var thrust = Vector2.ZERO
 
+var CRACK_STEP = 2.0/bubble_hp
+
+
 func get_input():
 	thrust = Vector2.ZERO
 	if Input.is_action_pressed("up"):
@@ -83,12 +86,15 @@ func get_pushed(enemy):
 func _on_hit_box_area_entered(enemy):
 	hp -= 1
 	get_pushed(enemy)
-	if hp == 0:
+	if hp == 0 && bubble_hp == 0:
 		animation_player.play("death")
 
 
 func _on_bubble_hit_box_area_entered(enemy):
 	bubble_hp -= 1
+	var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
+	print(CRACK_STEP)
+	bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
 	get_pushed(enemy)
 	if bubble_hp == 0:
 		bubble_sprite.queue_free()

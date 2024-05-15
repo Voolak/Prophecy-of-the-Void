@@ -34,6 +34,7 @@ debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
 position = Vector2(748, 595)
+bubble_hp = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

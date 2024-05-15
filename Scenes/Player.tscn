@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d2i0ibutk1w5h"]
+[gd_scene load_steps=18 format=3 uid="uid://d2i0ibutk1w5h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_p5byr"]
 [ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_ugyxq"]
@@ -122,11 +122,20 @@ _data = {
 "death": SubResource("Animation_gt3ei")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pheb2"]
+fractal_type = 3
+fractal_octaves = 10
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oayh0"]
+noise = SubResource("FastNoiseLite_pheb2")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aexos"]
 shader = ExtResource("5_sg4pp")
 shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
-shader_parameter/bubble_radius = 0.24
-shader_parameter/bubble_intensity = 0.766
+shader_parameter/bubble_radius = 0.231
+shader_parameter/crack_intensity = 0.0
+shader_parameter/crack_texture = SubResource("NoiseTexture2D_oayh0")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
 
@@ -140,6 +149,7 @@ angular_damp = 2.0
 script = ExtResource("1_p5byr")
 engine_power = 100
 Bullet = ExtResource("2_w0iyx")
+bubble_hp = 10
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_pr7im")
@@ -173,6 +183,7 @@ scale = Vector2(182.5, 197.5)
 texture = SubResource("CanvasTexture_oxkis")
 
 [node name="BubbleHitBox" type="Area2D" parent="BubbleSprite"]
+visible = false
 scale = Vector2(0.00547945, 0.00506329)
 collision_mask = 4
 
