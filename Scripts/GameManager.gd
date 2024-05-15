@@ -39,6 +39,7 @@ func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, poweru
 
 
 func handlepoweruptaken():
+	print("got signaled")
 	out_screen_spawns += 1
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
