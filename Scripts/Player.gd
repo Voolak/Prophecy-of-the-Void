@@ -2,15 +2,16 @@ extends RigidBody2D
 
 @onready var screensize = get_viewport_rect().size
 @onready var shooting_timer = $ShootingTimer
-@onready var marker_2d = $Sprite2D/Marker2D
-
+@onready var marker_2d = $CharacterSprite/Marker2D
+@onready var character_sprite = $CharacterSprite
+@onready var bubble_sprite = $BubbleSprite
 @onready var animation_player = $AnimationPlayer
 
 @export var engine_power = 800
 @export var rotation_speed = 5.0
-
 @export var Bullet : PackedScene
 @export var hp = 1
+@export var bubble_hp = 3
 
 var SHOOT_THRUST = 25000
 var thrust = Vector2.ZERO
@@ -36,9 +37,9 @@ func _physics_process(_delta):
 
 	var target_angle = direction.angle()
 
-	var current_angle = $Sprite2D.rotation
+	var current_angle = character_sprite.rotation
 	var new_angle = lerp_angle(current_angle, target_angle, rotation_speed * _delta)
-	$Sprite2D.rotation = new_angle
+	character_sprite.rotation = new_angle
 	
 	# shoot
 	if Input.is_action_pressed("shoot") && shooting_timer.is_stopped():
@@ -59,7 +60,7 @@ func clamp(value, min, max):
 		return value
 
 func shoot():
-	var current_angle = $Sprite2D.rotation
+	var current_angle = character_sprite.rotation
 	var thrust_angle = current_angle + PI
 	var direction = Vector2(cos(thrust_angle), sin(thrust_angle))
 	constant_force = SHOOT_THRUST * direction
@@ -75,10 +76,19 @@ func _integrate_forces(state):
 	state.transform = xform
 
 
+func get_pushed(enemy):
+	var push_direction = (global_position - enemy.global_position).normalized()
+	apply_central_force(enemy.get_parent().push_force * push_direction)
+
 func _on_hit_box_area_entered(enemy):
 	hp -= 1
-	var push_direction = (global_position - enemy.global_position).normalized()
-	print(enemy.get_parent().push_force * push_direction)
-	apply_central_force(enemy.get_parent().push_force * push_direction)
+	get_pushed(enemy)
 	if hp == 0:
 		animation_player.play("death")
+
+
+func _on_bubble_hit_box_area_entered(enemy):
+	bubble_hp -= 1
+	get_pushed(enemy)
+	if bubble_hp == 0:
+		bubble_sprite.queue_free()

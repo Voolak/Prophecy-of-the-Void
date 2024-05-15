@@ -1,18 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2i0ibutk1w5h"]
+[gd_scene load_steps=16 format=3 uid="uid://d2i0ibutk1w5h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_p5byr"]
 [ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_ugyxq"]
 [ext_resource type="PackedScene" uid="uid://dfautewc7ckgr" path="res://Scenes/Bullet.tscn" id="2_w0iyx"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="3_w3pn0"]
 [ext_resource type="Shader" path="res://Shaders/bubble.gdshader" id="5_sg4pp"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aexos"]
-shader = ExtResource("5_sg4pp")
-shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
-shader_parameter/bubble_radius = 0.24
-shader_parameter/bubble_intensity = 0.766
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_llfi4"]
 frequency = 0.0475
@@ -61,7 +53,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -100,7 +92,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -130,6 +122,17 @@ _data = {
 "death": SubResource("Animation_gt3ei")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aexos"]
+shader = ExtResource("5_sg4pp")
+shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
+shader_parameter/bubble_radius = 0.24
+shader_parameter/bubble_intensity = 0.766
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yftoa"]
+radius = 89.4539
+
 [node name="Player" type="RigidBody2D"]
 collision_mask = 4
 linear_damp = 1.0
@@ -137,11 +140,6 @@ angular_damp = 2.0
 script = ExtResource("1_p5byr")
 engine_power = 100
 Bullet = ExtResource("2_w0iyx")
-
-[node name="BubbleSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_aexos")
-scale = Vector2(182.5, 197.5)
-texture = SubResource("CanvasTexture_oxkis")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_pr7im")
@@ -161,7 +159,7 @@ one_shot = true
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBoxCollisionShape" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_26naw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -169,5 +167,20 @@ libraries = {
 "": SubResource("AnimationLibrary_h05xj")
 }
 
+[node name="BubbleSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_aexos")
+scale = Vector2(182.5, 197.5)
+texture = SubResource("CanvasTexture_oxkis")
+
+[node name="BubbleHitBox" type="Area2D" parent="BubbleSprite"]
+scale = Vector2(0.00547945, 0.00506329)
+collision_mask = 4
+
+[node name="BubbleCollisionShape" type="CollisionShape2D" parent="BubbleSprite/BubbleHitBox"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_yftoa")
+debug_color = Color(0.338075, 0.490513, 0.989064, 0.42)
+
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="BubbleSprite/BubbleHitBox" to="." method="_on_bubble_hit_box_area_entered"]
