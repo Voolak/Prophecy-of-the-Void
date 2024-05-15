@@ -6,6 +6,7 @@ extends RigidBody2D
 @onready var character_sprite = $CharacterSprite
 @onready var bubble_sprite = $BubbleSprite
 @onready var animation_player = $AnimationPlayer
+@onready var bubble_restoration_timer = $BubbleSprite/BubbleRestorationTimer
 
 @export var engine_power = 800
 @export var rotation_speed = 5.0
@@ -16,6 +17,7 @@ extends RigidBody2D
 var SHOOT_THRUST = 25000
 var thrust = Vector2.ZERO
 
+var MAX_BUBBLE_HP = bubble_hp
 var CRACK_STEP = 2.0/bubble_hp
 
 
@@ -84,17 +86,31 @@ func get_pushed(enemy):
 	apply_central_force(enemy.get_parent().push_force * push_direction)
 
 func _on_hit_box_area_entered(enemy):
-	hp -= 1
 	get_pushed(enemy)
-	if hp == 0 && bubble_hp == 0:
+	if bubble_hp == 0:
+		print("die")
 		animation_player.play("death")
 
 
 func _on_bubble_hit_box_area_entered(enemy):
+	# lose hp and start restoration timer
 	bubble_hp -= 1
-	var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
-	print(CRACK_STEP)
-	bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
 	get_pushed(enemy)
+	bubble_restoration_timer.start()
+	# show crack on shield
+	var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
+	bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
+	# destroy shield if hp == 0
 	if bubble_hp == 0:
 		bubble_sprite.queue_free()
+
+
+func _on_bubble_restoration_timer_timeout():
+	# restore hp
+	bubble_hp += 1
+	# restore visual
+	var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
+	bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity - CRACK_STEP)
+	# restart if bubble not to max hp
+	if bubble_hp < MAX_BUBBLE_HP && bubble_restoration_timer.is_stopped():
+		bubble_restoration_timer.start()

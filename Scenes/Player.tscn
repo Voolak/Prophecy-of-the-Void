@@ -134,7 +134,7 @@ noise = SubResource("FastNoiseLite_pheb2")
 shader = ExtResource("5_sg4pp")
 shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
 shader_parameter/bubble_radius = 0.231
-shader_parameter/crack_intensity = 0.0
+shader_parameter/crack_intensity = 9.5e-08
 shader_parameter/crack_texture = SubResource("NoiseTexture2D_oayh0")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
@@ -192,6 +192,10 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_yftoa")
 debug_color = Color(0.338075, 0.490513, 0.989064, 0.42)
 
+[node name="BubbleRestorationTimer" type="Timer" parent="BubbleSprite"]
+one_shot = true
+
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="BubbleSprite/BubbleHitBox" to="." method="_on_bubble_hit_box_area_entered"]
+[connection signal="timeout" from="BubbleSprite/BubbleRestorationTimer" to="." method="_on_bubble_restoration_timer_timeout"]
