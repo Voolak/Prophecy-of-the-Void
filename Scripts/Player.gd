@@ -13,6 +13,8 @@ extends RigidBody2D
 @export var Bullet : PackedScene
 @export var hp = 1
 @export var bubble_hp = 3
+@export var bullet_hp = 3
+@export var bullet_damage = 1
 
 var SHOOT_THRUST = 25000
 var thrust = Vector2.ZERO
@@ -70,9 +72,10 @@ func shoot():
 	var direction = Vector2(cos(thrust_angle), sin(thrust_angle))
 	constant_force = SHOOT_THRUST * direction
 	
-	var b = Bullet.instantiate()
-	owner.add_child(b)
-	b.transform = marker_2d.global_transform
+	var bullet = Bullet.instantiate()
+	bullet.set_parameters(bullet_hp, bullet_damage)
+	owner.add_child(bullet)
+	bullet.transform = marker_2d.global_transform
 
 func _integrate_forces(state):
 	var xform = state.transform
@@ -88,18 +91,18 @@ func get_pushed(enemy):
 func _on_hit_box_area_entered(enemy):
 	get_pushed(enemy)
 	if bubble_hp == 0:
-		print("die")
 		animation_player.play("death")
 
 
 func _on_bubble_hit_box_area_entered(enemy):
 	# lose hp and start restoration timer
-	bubble_hp -= 1
+	bubble_hp -= enemy.get_parent().damage
 	get_pushed(enemy)
-	bubble_restoration_timer.start()
-	# show crack on shield
-	var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
-	bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
+	if bubble_hp < MAX_BUBBLE_HP:
+		bubble_restoration_timer.start()
+		# show crack on shield
+		var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
+		bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
 	# destroy shield if hp == 0
 	if bubble_hp == 0:
 		bubble_sprite.queue_free()
@@ -114,3 +117,4 @@ func _on_bubble_restoration_timer_timeout():
 	# restart if bubble not to max hp
 	if bubble_hp < MAX_BUBBLE_HP && bubble_restoration_timer.is_stopped():
 		bubble_restoration_timer.start()
+

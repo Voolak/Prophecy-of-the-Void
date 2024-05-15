@@ -24,6 +24,26 @@ shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_2pf2x")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26naw"]
 size = Vector2(118, 118)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pheb2"]
+fractal_type = 3
+fractal_octaves = 10
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oayh0"]
+noise = SubResource("FastNoiseLite_pheb2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aexos"]
+shader = ExtResource("5_sg4pp")
+shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
+shader_parameter/bubble_radius = 0.231
+shader_parameter/crack_intensity = 9.5e-08
+shader_parameter/crack_texture = SubResource("NoiseTexture2D_oayh0")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yftoa"]
+radius = 89.4539
+
 [sub_resource type="Animation" id="Animation_3ahre"]
 length = 0.001
 tracks/0/type = "value"
@@ -53,7 +73,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
+tracks/2/path = NodePath("CharacterSprite/HitBox/HitBoxCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -92,7 +112,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
+tracks/2/path = NodePath("CharacterSprite/HitBox/HitBoxCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -122,26 +142,6 @@ _data = {
 "death": SubResource("Animation_gt3ei")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pheb2"]
-fractal_type = 3
-fractal_octaves = 10
-domain_warp_type = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oayh0"]
-noise = SubResource("FastNoiseLite_pheb2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aexos"]
-shader = ExtResource("5_sg4pp")
-shader_parameter/bubble_color = Color(0, 0.983334, 1, 1)
-shader_parameter/bubble_radius = 0.231
-shader_parameter/crack_intensity = 9.5e-08
-shader_parameter/crack_texture = SubResource("NoiseTexture2D_oayh0")
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_oxkis"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_yftoa"]
-radius = 89.4539
-
 [node name="Player" type="RigidBody2D"]
 collision_mask = 4
 linear_damp = 1.0
@@ -163,19 +163,14 @@ position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.230469, 0.230469)
 texture = ExtResource("2_ugyxq")
 
-[node name="ShootingTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="CharacterSprite"]
 collision_mask = 4
 
-[node name="HitBoxCollisionShape" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBoxCollisionShape" type="CollisionShape2D" parent="CharacterSprite/HitBox"]
 shape = SubResource("RectangleShape2D_26naw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_h05xj")
-}
+[node name="ShootingTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="BubbleSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_aexos")
@@ -195,7 +190,12 @@ debug_color = Color(0.338075, 0.490513, 0.989064, 0.42)
 [node name="BubbleRestorationTimer" type="Timer" parent="BubbleSprite"]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h05xj")
+}
+
+[connection signal="area_entered" from="CharacterSprite/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="BubbleSprite/BubbleHitBox" to="." method="_on_bubble_hit_box_area_entered"]
 [connection signal="timeout" from="BubbleSprite/BubbleRestorationTimer" to="." method="_on_bubble_restoration_timer_timeout"]

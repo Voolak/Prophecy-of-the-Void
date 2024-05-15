@@ -1,8 +1,11 @@
 extends Node2D
 
+signal enemydies
+
 @export var speed = 200
 @export var steer_force = 250.0
 @export var hp = 1
+@export var damage = 1
 @export var push_force = 18000
 
 var velocity = Vector2.ZERO
@@ -12,6 +15,7 @@ var canWarp = false
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
 @onready var indicator = $indicator
+
 
 func seek():
 	var steer = Vector2.ZERO
@@ -34,11 +38,11 @@ func _physics_process(delta):
 	display_indicator()
 
 # on bullet enter
-func _on_hit_box_area_entered(area):
-	hp -= 1
+func _on_hit_box_area_entered(bullet):
+	hp -= bullet.damage
 	if hp <= 0:
+		GlobalSignals.emit_signal("EnemyDies")
 		$".".animation_player.play("death")
-	area.queue_free()	#delete bullet
 	
 func enable_wrap():
 	canWarp = true

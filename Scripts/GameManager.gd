@@ -2,19 +2,18 @@ extends Node
 
 @onready var timer = $Timer
 @onready var player = %Player
+@onready var enemy_spawn = %EnemySpawn
+@onready var in_screen_spawn_manager = %InScreenSpawnManager
+
+var wave_index = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	GlobalSignals.connect("EnemyDies", handleenemydies)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#if player.hp == 0:
-		#timer.start()
-		#player.queue_free()
-	
-	#for enemy in get_tree().get_nodes_in_group("enemies"):
-		#if enemy.hp <= 0:
-			#enemy.queue_free()
-
+func handleenemydies():
+	if enemy_spawn.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
+		# the last enemy is still in the process of dying
+		if get_tree().get_nodes_in_group("enemies").size() == 1:
+			print("jokes over ! you dead !")
