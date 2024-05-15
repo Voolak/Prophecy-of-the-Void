@@ -14,12 +14,12 @@ size = Vector2(1757, 939)
 
 [node name="LevelModel" type="Node2D"]
 
+[node name="GameManager" parent="." groups=["gamemanager"] instance=ExtResource("1_cmnsn")]
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(988, 503)
 scale = Vector2(1.03814, 1.03841)
 texture = ExtResource("1_oellx")
-
-[node name="GameManager" parent="." groups=["gamemanager"] instance=ExtResource("1_cmnsn")]
 
 [node name="WarpZone" type="Area2D" parent="."]
 collision_layer = 0
