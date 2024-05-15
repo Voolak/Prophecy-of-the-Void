@@ -22,13 +22,13 @@ func powerup_player(player):
 		powerup_type_enum.DAMAGE:
 			player.bullet_damage += 1
 		powerup_type_enum.PENETRATION:
-			player.bullet_health += 1
+			player.bullet_hp += 1
 		powerup_type_enum.MV_SPD:
-			player.engine_speed += 200
+			player.engine_power += 200
 			player.rotation_speed += 1 
-	print(player.bullet_damage)
 
 func _on_hit_box_area_entered(player):
 	powerup_player(player.get_parent().get_parent())
+	GlobalSignals.emit_signal("PowerupTaken")
 	for powerup in get_tree().get_nodes_in_group("powerup"):
 		powerup.queue_free()

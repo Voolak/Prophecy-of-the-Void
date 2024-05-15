@@ -22,6 +22,5 @@ func _on_timer_timeout():
 			enemy.global_position = Vector2(randi_range(0+spawnOffSet, screensize.x-spawnOffSet), \
 											randi_range(0+spawnOffSet, screensize.y-spawnOffSet))
 			enemies_left -= 1
-	if enemies_left <= 0:
-		timer.one_shot = true
+	
 		

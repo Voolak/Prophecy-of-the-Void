@@ -93,7 +93,6 @@ func _on_hit_box_area_entered(enemy):
 	if bubble_hp == 0:
 		animation_player.play("death")
 
-
 func _on_bubble_hit_box_area_entered(enemy):
 	# lose hp and start restoration timer
 	bubble_hp -= enemy.get_parent().damage

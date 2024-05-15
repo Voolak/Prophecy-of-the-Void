@@ -25,6 +25,4 @@ func _on_timer_timeout():
 			enemy.global_position = path_follow_2d.global_position
 			# decrease nb of enemies and disable timer if no more to spawn
 			enemies_left -= 1
-		else :
-			timer.one_shot = true
 	

@@ -6,6 +6,9 @@ extends Node2D
 @onready var enemy_spawn = %EnemySpawn
 @onready var in_screen_spawn_manager = %InScreenSpawnManager
 
+@export var out_screen_spawns := 5
+@export var in_screen_spawns := 5
+
 enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD}
 var wave_index = 1
 var Powerup = preload("res://Scenes/Powerup.tscn")
@@ -14,6 +17,7 @@ var powerup_sprite_1 = preload("res://Assets/Sprites/poussin.png")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalSignals.connect("EnemyDies", handleenemydies)
+	GlobalSignals.connect("PowerupTaken", handlepoweruptaken)
 
 func handleenemydies():
 	if enemy_spawn.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
@@ -32,3 +36,10 @@ func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, poweru
 	var new_powerup = Powerup.instantiate()
 	new_powerup.set_parameters(powerup_position, powerup, powerup_sprite)
 	owner.add_child(new_powerup)
+
+
+func handlepoweruptaken():
+	out_screen_spawns += 1
+	in_screen_spawns += 1
+	in_screen_spawn_manager.enemies_left = in_screen_spawns
+	enemy_spawn.enemies_left = out_screen_spawns 
