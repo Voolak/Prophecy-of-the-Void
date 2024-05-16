@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck1n1xx3oeocj"]
+[gd_scene load_steps=10 format=3 uid="uid://c4u75bhoaj37n"]
 
-[ext_resource type="Script" path="res://Scripts/Pause_Menu.gd" id="1_85plj"]
+[ext_resource type="Script" path="res://Scripts/Game_Over_Menu.gd" id="1_ndlmb"]
 [ext_resource type="Shader" path="res://Shaders/blur.gdshader" id="2_ixcch"]
 [ext_resource type="PackedScene" uid="uid://c4ak3ly5n4yiy" path="res://Scenes/Options_Menu.tscn" id="3_xndjc"]
 
@@ -8,9 +8,11 @@
 shader = ExtResource("2_ixcch")
 shader_parameter/lod = 0.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_vtfgs"]
-line_spacing = 1.0
+[sub_resource type="LabelSettings" id="LabelSettings_twbpp"]
 font_size = 46
+
+[sub_resource type="LabelSettings" id="LabelSettings_mx0ha"]
+font_size = 34
 
 [sub_resource type="Animation" id="Animation_lhjhf"]
 length = 0.001
@@ -73,7 +75,7 @@ _data = {
 "blur": SubResource("Animation_xtiet")
 }
 
-[node name="PauseMenu" type="Control"]
+[node name="GameOverMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -81,7 +83,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_85plj")
+script = ExtResource("1_ndlmb")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ea4gg")
@@ -96,47 +98,72 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -144.5
-offset_top = -186.0
-offset_right = 144.5
-offset_bottom = 186.0
+offset_left = -313.0
+offset_top = -274.0
+offset_right = 313.0
+offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="GameOver" type="Label" parent="Panel"]
 layout_mode = 2
-text = "= PAUSE ="
-label_settings = SubResource("LabelSettings_vtfgs")
+offset_top = 30.0
+offset_right = 626.0
+offset_bottom = 94.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_twbpp")
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+[node name="BestWave" type="Label" parent="Panel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Resume"
+offset_top = 106.0
+offset_right = 626.0
+offset_bottom = 170.0
+text = "Best wave : 69"
+label_settings = SubResource("LabelSettings_mx0ha")
+horizontal_alignment = 1
 
-[node name="Options" type="Button" parent="Panel/VBoxContainer"]
+[node name="Wave" type="Label" parent="Panel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Options"
+offset_left = 1.0
+offset_top = 170.0
+offset_right = 627.0
+offset_bottom = 234.0
+text = "Wave : 69"
+label_settings = SubResource("LabelSettings_mx0ha")
+horizontal_alignment = 1
 
-[node name="Restart" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="RetryButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -18.0
+offset_right = 167.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 35
-text = "Restart"
+text = "Retry"
 
-[node name="MainMenu" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="MenuButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = 107.0
+offset_right = 167.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 35
-text = "Main menu"
+text = "Menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -147,7 +174,5 @@ libraries = {
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Panel/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Panel/MenuButton" to="." method="_on_menu_button_pressed"]

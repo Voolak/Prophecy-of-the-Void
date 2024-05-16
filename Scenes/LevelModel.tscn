@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
-[ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
+[ext_resource type="PackedScene" uid="uid://ck1n1xx3oeocj" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
 size = Vector2(1794, 959)
