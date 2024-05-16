@@ -13,11 +13,13 @@ enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD}
 var wave_index = 1
 var Powerup = preload("res://Scenes/Powerup.tscn")
 var powerup_sprite_1 = preload("res://Assets/Sprites/poussin.png")
+var Slime_model = preload("res://Scenes/Slimes.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalSignals.connect("EnemyDies", handleenemydies)
 	GlobalSignals.connect("PowerupTaken", handlepoweruptaken)
+	GlobalSignals.connect("SlimeMultiply", handleslimemultiply)
 
 func handleenemydies():
 	if enemy_spawn.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
@@ -44,3 +46,18 @@ func handlepoweruptaken():
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
 	enemy_spawn.enemies_left = out_screen_spawns 
+
+
+func handleslimemultiply(slime_position, slime_angle):
+	var slime1 = Slime_model.instantiate()
+	var slime2 = Slime_model.instantiate()
+
+	var offset_angle = 75  # degrees
+	var direction1 = Vector2.RIGHT.rotated(slime_angle + offset_angle).normalized()
+	var direction2 = Vector2.RIGHT.rotated(slime_angle - offset_angle).normalized()
+
+	slime1.set_parameters(slime_position, direction1)
+	slime2.set_parameters(slime_position, direction2)
+
+	owner.add_child(slime1)
+	owner.add_child(slime2)
