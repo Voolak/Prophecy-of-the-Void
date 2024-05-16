@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=11 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/Homing_Ennemies.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/EnemySpawn.tscn" id="5_foc04"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
+[ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
 size = Vector2(1757, 939)
@@ -60,5 +61,10 @@ unique_name_in_owner = true
 enemies_left = 2
 simultaneous_enemies = 1
 Enemy = ExtResource("5_1ny0w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_v0xbx")]
+visible = false
 
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]

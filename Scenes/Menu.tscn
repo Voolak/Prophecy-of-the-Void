@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq8nrv5um4hy1"]
+[gd_scene load_steps=4 format=3 uid="uid://dq8nrv5um4hy1"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_722wd"]
+[ext_resource type="Texture2D" uid="uid://b2hnyjxrt4tcl" path="res://Assets/Sprites/background1.png" id="2_sabc2"]
+[ext_resource type="PackedScene" uid="uid://c4ak3ly5n4yiy" path="res://Scenes/Options_Menu.tscn" id="3_1ym4x"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -10,6 +12,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_722wd")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(988, 503)
+scale = Vector2(1.03814, 1.03841)
+texture = ExtResource("2_sabc2")
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_1ym4x")]
+visible = false
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -7,7 +7,9 @@ func _on_play_pressed():
 
 
 func _on_options_pressed():
-	get_tree().change_scene_to_file("res://scenes/Options_Menu.tscn")
+	$OptionsMenu.visible = !$OptionsMenu.visible
+	$MarginContainer.visible = !$MarginContainer.visible
+	#get_tree().change_scene_to_file("res://scenes/Options_Menu.tscn")
 
 
 func _on_quit_pressed():
