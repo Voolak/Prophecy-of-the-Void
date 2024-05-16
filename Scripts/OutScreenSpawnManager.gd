@@ -1,12 +1,13 @@
-extends Node2D
+extends Path2D
 
-@onready var screensize = get_viewport_rect().size
 @onready var timer = $Timer
+@onready var path_follow_2d = $PathFollow2D
 
+@export var Enemy : PackedScene
 @export var enemies_left : int
 @export var simultaneous_enemies : int
-@export var Enemy : PackedScene
-@export var spawnOffSet := 10
+
+enum enemy_type {HomingEnemy}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -16,11 +17,11 @@ func _process(delta):
 func _on_timer_timeout():
 	for i in simultaneous_enemies:
 		if enemies_left > 0:
+			# instantiate enemies
 			var enemy = Enemy.instantiate()
-			enemy.add_to_group("enemies")
 			owner.add_child(enemy)
-			enemy.global_position = Vector2(randi_range(0+spawnOffSet, screensize.x-spawnOffSet), \
-											randi_range(0+spawnOffSet, screensize.y-spawnOffSet))
+			path_follow_2d.progress_ratio = randf()
+			enemy.global_position = path_follow_2d.global_position
+			# decrease nb of enemies and disable timer if no more to spawn
 			enemies_left -= 1
 	
-		
