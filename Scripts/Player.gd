@@ -7,6 +7,7 @@ extends RigidBody2D
 @onready var bubble_sprite = $BubbleSprite
 @onready var animation_player = $AnimationPlayer
 @onready var bubble_restoration_timer = $BubbleSprite/BubbleRestorationTimer
+@onready var camera = $"../Camera2D"
 
 @export var engine_power = 800
 @export var rotation_speed = 5.0
@@ -95,6 +96,7 @@ func _on_hit_box_area_entered(enemy):
 
 func _on_bubble_hit_box_area_entered(enemy):
 	# lose hp and start restoration timer
+	camera.shake_camera()
 	bubble_hp -= enemy.get_parent().damage
 	get_pushed(enemy)
 	if bubble_hp < MAX_BUBBLE_HP:
