@@ -1,10 +1,11 @@
 extends Control
+@onready var parallax_background = $ParallaxBackground
 
 func _ready():
 	get_viewport().size = DisplayServer.screen_get_size()
 
 func _process(delta):
-	$ParallaxBackground.scroll_offset=get_global_mouse_position()
+	parallax_background.scroll_offset=get_global_mouse_position()
 
 
 func _on_play_pressed():
