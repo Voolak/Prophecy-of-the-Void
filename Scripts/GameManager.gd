@@ -14,6 +14,7 @@ var wave_index = 1
 var Powerup = preload("res://Scenes/Powerup.tscn")
 var powerup_sprite_1 = preload("res://Assets/Sprites/poussin.png")
 var Slime_model = preload("res://Scenes/Slimes.tscn")
+var is_game_over = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,3 +63,9 @@ func handleslimemultiply(slime_position, slime_angle):
 
 	owner.add_child(slime1)
 	owner.add_child(slime2)
+
+
+func _on_player_death():
+	is_game_over = true
+	$"../CanvasLayer/GameOverMenu".visible = true
+	pass # Replace with function body.

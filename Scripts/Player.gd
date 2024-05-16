@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal death
+
 @onready var screensize = get_viewport_rect().size
 @onready var shooting_timer = $ShootingTimer
 @onready var marker_2d = $CharacterSprite/Marker2D
@@ -92,6 +94,7 @@ func get_pushed(enemy):
 func _on_hit_box_area_entered(enemy):
 	get_pushed(enemy)
 	if bubble_hp == 0:
+		death.emit()
 		animation_player.play("death")
 
 func _on_bubble_hit_box_area_entered(enemy):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=17 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 [ext_resource type="PackedScene" uid="uid://ck1n1xx3oeocj" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
+[ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Game_Over_Menu.tscn" id="15_qxwan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
 size = Vector2(1794, 959)
@@ -97,4 +98,8 @@ texture = ExtResource("4_djuon")
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_v0xbx")]
 visible = false
 
+[node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("15_qxwan")]
+visible = false
+
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]
+[connection signal="death" from="Player" to="GameManager" method="_on_player_death"]
