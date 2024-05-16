@@ -31,3 +31,5 @@ shape = SubResource("CircleShape2D_gi5ey")
 debug_color = Color(0.997488, 0, 0.164827, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Indicator" type="Sprite2D" parent="."]

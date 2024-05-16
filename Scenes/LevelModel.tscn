@@ -50,12 +50,6 @@ position = Vector2(306, 155)
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_y83sq")]
 position = Vector2(294, 353)
 
-[node name="HomingEnnemy" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(1256, 580)
-
-[node name="HomingEnnemy2" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(859, 196)
-
 [node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
 unique_name_in_owner = true
 position = Vector2(-0.912407, -20.6325)

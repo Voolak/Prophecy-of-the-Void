@@ -1,9 +1,13 @@
 extends Enemy
+
 signal enemydies
 
 @export var steer_force = 250.0
 
 @onready var player = %Player
+
+func _ready():
+	add_to_group("enemies")
 
 func seek():
 	var steer = Vector2.ZERO

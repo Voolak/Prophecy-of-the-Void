@@ -8,7 +8,8 @@ extends Node2D
 
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
-@onready var indicator = $indicator
+@onready var indicator = $Indicator
+
 
 var velocity = Vector2.ZERO
 var canWarp = false
