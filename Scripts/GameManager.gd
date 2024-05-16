@@ -68,4 +68,4 @@ func handleslimemultiply(slime_position, slime_angle):
 func _on_player_death():
 	is_game_over = true
 	$"../CanvasLayer/GameOverMenu".visible = true
-	pass # Replace with function body.
+	$"../CanvasLayer/GameOverMenu/AnimationPlayer".play("blur")

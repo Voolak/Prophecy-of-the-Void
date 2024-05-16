@@ -22,6 +22,7 @@ size = Vector2(1794, 959)
 [node name="LevelModel" type="Node2D"]
 
 [node name="GameManager" parent="." groups=["gamemanager"] instance=ExtResource("1_cmnsn")]
+unique_name_in_owner = true
 
 [node name="WarpZone" type="Area2D" parent="."]
 collision_layer = 0

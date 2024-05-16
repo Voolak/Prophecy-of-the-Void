@@ -1,5 +1,6 @@
 extends Control
 
+
 func _ready():
 	$AnimationPlayer.play("RESET")
 
@@ -12,12 +13,13 @@ func pause():
 	$AnimationPlayer.play("blur")
 
 func testEsc():
-	if Input.is_action_just_pressed("pause") and !get_tree().paused:
-		visible = !visible
-		pause()
-	elif Input.is_action_just_pressed("pause") and get_tree().paused:
-		resume()
-		visible = !visible
+	if !%GameManager.is_game_over:
+		if Input.is_action_just_pressed("pause") and !get_tree().paused:
+			visible = !visible
+			pause()
+		elif Input.is_action_just_pressed("pause") and get_tree().paused:
+			resume()
+			visible = !visible
 
 
 func _on_resume_pressed():
