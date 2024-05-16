@@ -1,4 +1,12 @@
 extends Control
 
+@onready var margin_container = $"../MarginContainer"
+@onready var panel = $"../Panel"
+
+
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+	$".".visible = false
+	if margin_container:
+		margin_container.visible = true
+	elif panel:
+		panel.visible = true
