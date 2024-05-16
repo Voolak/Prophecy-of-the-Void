@@ -274,4 +274,6 @@ libraries = {
 }
 autoplay = "scaling"
 
+[node name="Indicator" type="Sprite2D" parent="."]
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

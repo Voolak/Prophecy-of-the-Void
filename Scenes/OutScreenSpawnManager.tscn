@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyj4pf7yyxsye"]
+
+[ext_resource type="Script" path="res://Scripts/OutScreenSpawnManager.gd" id="1_xtlwq"]
+[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="2_xc4y5"]
+[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="3_kxwf7"]
+
+[sub_resource type="Curve2D" id="Curve2D_yhlli"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3096.78, -109.097, 0, 0, 0, 0, 3093.83, 1728.43, 0, 0, 0, 0, -137.571, 1735.06, 0, 0, 0, 0, -131.653, -102.473, 0, 0, 0, 0, 3096.78, -109.097)
+}
+point_count = 5
+
+[node name="OutScreenSpawnManager" type="Path2D"]
+position = Vector2(-19.5153, -20.8003)
+scale = Vector2(1.03197, 1.06371)
+curve = SubResource("Curve2D_yhlli")
+script = ExtResource("1_xtlwq")
+enemy_list = Array[PackedScene]([ExtResource("2_xc4y5"), ExtResource("3_kxwf7")])
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(3096.78, -109.097)
+rotation = 1.5724
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

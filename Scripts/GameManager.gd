@@ -3,8 +3,8 @@ extends Node2D
 @onready var screensize = get_viewport_rect().size
 @onready var timer = $Timer
 @onready var player = %Player
-@onready var enemy_spawn = %EnemySpawn
 @onready var in_screen_spawn_manager = %InScreenSpawnManager
+@onready var out_screen_spawn_manager = %OutScreenSpawnManager
 
 @export var out_screen_spawns := 5
 @export var in_screen_spawns := 5
@@ -22,7 +22,9 @@ func _ready():
 	GlobalSignals.connect("SlimeMultiply", handleslimemultiply)
 
 func handleenemydies():
-	if enemy_spawn.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
+	print("dies")
+	print(get_tree().get_nodes_in_group("enemies").size())
+	if out_screen_spawn_manager.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
 		# the last enemy is still in the process of dying
 		if get_tree().get_nodes_in_group("enemies").size() == 1:
 			var powerup_pos_1 = Vector2(screensize.x/3, screensize.y/2)
@@ -41,11 +43,10 @@ func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, poweru
 
 
 func handlepoweruptaken():
-	print("got signaled")
 	out_screen_spawns += 1
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
-	enemy_spawn.enemies_left = out_screen_spawns 
+	out_screen_spawn_manager.enemies_left = out_screen_spawns 
 
 
 func handleslimemultiply(slime_position, slime_angle):

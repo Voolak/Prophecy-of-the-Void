@@ -5,15 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://b2hnyjxrt4tcl" path="res://Assets/Sprites/background1.png" id="1_oellx"]
 [ext_resource type="Script" path="res://WarpZone.gd" id="2_evsbq"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
-[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/Homing_Ennemies.tscn" id="5_1ny0w"]
-[ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/EnemySpawn.tscn" id="5_foc04"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
-[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="5_y83sq"]
+[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="5_1ny0w"]
+[ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
-[ext_resource type="PackedScene" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
+[ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7ca"]
-size = Vector2(1757, 939)
+size = Vector2(1794, 959)
 
 [node name="LevelModel" type="Node2D"]
 
@@ -30,13 +29,14 @@ collision_mask = 4
 script = ExtResource("2_evsbq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
-position = Vector2(969.5, 546.5)
+position = Vector2(951, 536.5)
 shape = SubResource("RectangleShape2D_ru7ca")
 debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 position = Vector2(748, 595)
 bubble_hp = 3
+bullet_hp = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -45,30 +45,18 @@ script = ExtResource("5_o0g1s")
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_kkc0p")
 
-[node name="Slime" parent="Enemies" instance=ExtResource("5_y83sq")]
-position = Vector2(306, 155)
-
-[node name="Slime2" parent="Enemies" instance=ExtResource("5_y83sq")]
-position = Vector2(294, 353)
-
-[node name="HomingEnnemy" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(1256, 580)
-
-[node name="HomingEnnemy2" parent="Enemies" instance=ExtResource("5_1ny0w")]
-position = Vector2(859, 196)
-
-[node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
-unique_name_in_owner = true
-position = Vector2(-83.2546, -49.5216)
-scale = Vector2(0.681434, 0.774339)
-enemies_left = 5
-simultaneous_enemies = 2
-
 [node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
 unique_name_in_owner = true
-enemies_left = 2
+enemies_left = 4
+simultaneous_enemies = 3
+enemy_list = Array[PackedScene]([ExtResource("5_1ny0w")])
+
+[node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
+unique_name_in_owner = true
+position = Vector2(19.8117, -59.0638)
+scale = Vector2(0.64557, 0.71298)
+enemies_left = 3
 simultaneous_enemies = 1
-Enemy = ExtResource("5_1ny0w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

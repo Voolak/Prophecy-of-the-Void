@@ -10,8 +10,6 @@ var speed = 750
 
 func _ready():
 	timer.start()
-	
-	
 
 # use when instantiate : Bullet.instantiate().with_parameters(...)
 func set_parameters(hp_param: int, damage_param: int):
