@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=16 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dkb3x83lhud3x" path="res://Assets/Sprites/background2_elements/orange_nebula_1.png" id="2_pxwne"]
 [ext_resource type="Texture2D" uid="uid://bys4g5x0i68tt" path="res://Assets/Sprites/background2_elements/purple_nebula_1.png" id="3_1lg6r"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
+[ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="4_djuon"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
-[ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="4_djuon"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
