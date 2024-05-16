@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=17 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
 [ext_resource type="Texture2D" uid="uid://b2hnyjxrt4tcl" path="res://Assets/Sprites/background1.png" id="1_oellx"]
+[ext_resource type="Script" path="res://Scripts/Paralax.gd" id="1_rtggu"]
 [ext_resource type="Script" path="res://WarpZone.gd" id="2_evsbq"]
+[ext_resource type="Texture2D" uid="uid://dkb3x83lhud3x" path="res://Assets/Sprites/background2_elements/orange_nebula_1.png" id="2_pxwne"]
+[ext_resource type="Texture2D" uid="uid://bys4g5x0i68tt" path="res://Assets/Sprites/background2_elements/purple_nebula_1.png" id="3_1lg6r"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
+[ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="4_djuon"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
@@ -17,11 +21,6 @@ size = Vector2(1794, 959)
 [node name="LevelModel" type="Node2D"]
 
 [node name="GameManager" parent="." groups=["gamemanager"] instance=ExtResource("1_cmnsn")]
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(988, 503)
-scale = Vector2(1.03814, 1.03841)
-texture = ExtResource("1_oellx")
 
 [node name="WarpZone" type="Area2D" parent="."]
 collision_layer = 0
@@ -59,6 +58,41 @@ enemies_left = 3
 simultaneous_enemies = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_rtggu")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2(0.005, 0.005)
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+position = Vector2(988, 503)
+scale = Vector2(1.03814, 1.03841)
+texture = ExtResource("1_oellx")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2(0.015, 0.015)
+
+[node name="Background2" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(988, 503)
+scale = Vector2(1.43644, 1.50732)
+texture = ExtResource("2_pxwne")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2(0.03, 0.03)
+
+[node name="Background2" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(988, 503)
+scale = Vector2(1.5, 1.55976)
+texture = ExtResource("3_1lg6r")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2(0.01, 0.01)
+
+[node name="Background2" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer4"]
+position = Vector2(988, 503)
+scale = Vector2(1.41864, 1.1061)
+texture = ExtResource("4_djuon")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_v0xbx")]
 visible = false
