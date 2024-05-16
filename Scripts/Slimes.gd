@@ -4,10 +4,10 @@ extends Node2D
 @export var hp: int = 1
 @export var direction: Vector2 = Vector2.ZERO
 
-var velocity: Vector2 = Vector2.ZERO
-@onready var player = %Player
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
+
+var velocity: Vector2 = Vector2.ZERO
 	
 func _ready():
 	animation_player.play("scaling")
@@ -30,4 +30,19 @@ func _on_hit_box_area_entered(area):
 	area.queue_free()	#delete bullet
 
 func multiply():
-	pass
+	# Create two new slime instances
+	var slime1 = duplicate()
+	var slime2 = duplicate()
+
+	var angle = direction.angle()
+	var offset_angle = 75  # degrees
+	var direction1 = Vector2.RIGHT.rotated(angle + offset_angle).normalized()
+	var direction2 = Vector2.RIGHT.rotated(angle - offset_angle).normalized()
+
+	slime1.direction = direction1
+	slime2.direction = direction2
+
+	get_parent().add_child(slime1)
+	get_parent().add_child(slime2)
+
+	queue_free()

@@ -1,24 +1,47 @@
-[gd_scene load_steps=20 format=3 uid="uid://3216u18yillk"]
+[gd_scene load_steps=21 format=3 uid="uid://3216u18yillk"]
 
 [ext_resource type="Script" path="res://Scripts/Slimes.gd" id="1_caepv"]
-[ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="2_5drgn"]
 [ext_resource type="Texture2D" uid="uid://bh1jln6f0ey5b" path="res://Assets/Sprites/Slime.png" id="3_s6524"]
+[ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="4_i3q72"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_k10wo"]
+[sub_resource type="Shader" id="Shader_xj3tc"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform sampler2D dissolve_texture : source_color;
+uniform float dissolve_value : hint_range(0,1);
+uniform float burn_size: hint_range(0.0, 1.0, 0.01);
+uniform vec4 burn_color: source_color;
+
+void fragment(){
+    vec4 main_texture = texture(TEXTURE, UV);
+    vec4 noise_texture = texture(dissolve_texture, UV);
+	
+	// This is needed to avoid keeping a small burn_color dot with dissolve being 0 or 1
+	// is there another way to do it?
+	float burn_size_step = burn_size * step(0.001, dissolve_value) * step(dissolve_value, 0.999);
+	float threshold = smoothstep(noise_texture.x-burn_size_step, noise_texture.x, dissolve_value);
+	float border = smoothstep(noise_texture.x, noise_texture.x + burn_size_step, dissolve_value);
+	
+	COLOR.a *= threshold;
+	COLOR.rgb = mix(burn_color.rgb, main_texture.rgb, border);
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4qh3i"]
 frequency = 0.1
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vh0dq"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6creb"]
 width = 96
 height = 96
-noise = SubResource("FastNoiseLite_k10wo")
+noise = SubResource("FastNoiseLite_4qh3i")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdlfd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bw4o1"]
 resource_local_to_scene = true
-shader = ExtResource("2_5drgn")
+shader = SubResource("Shader_xj3tc")
 shader_parameter/dissolve_value = 1.0
 shader_parameter/burn_size = 0.1
 shader_parameter/burn_color = Color(0.52549, 0, 0, 1)
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vh0dq")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_6creb")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwdj7"]
 atlas = ExtResource("3_s6524")
@@ -128,6 +151,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_n8md7"]
+resource_local_to_scene = true
 resource_name = "death"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -219,9 +243,10 @@ _data = {
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_caepv")
+direction = Vector2(1, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_hdlfd")
+material = SubResource("ShaderMaterial_bw4o1")
 sprite_frames = SubResource("SpriteFrames_dh0kt")
 autoplay = "default"
 frame = 4
@@ -249,5 +274,10 @@ libraries = {
 "": SubResource("AnimationLibrary_lo7og")
 }
 autoplay = "scaling"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -67)
+scale = Vector2(0.273438, 1.10156)
+texture = ExtResource("4_i3q72")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
