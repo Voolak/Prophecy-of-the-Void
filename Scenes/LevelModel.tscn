@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=11 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
-[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="5_y83sq"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 
@@ -44,24 +43,18 @@ position = Vector2(960, 540)
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_kkc0p")
 
-[node name="Slime" parent="Enemies" instance=ExtResource("5_y83sq")]
-position = Vector2(306, 155)
-
-[node name="Slime2" parent="Enemies" instance=ExtResource("5_y83sq")]
-position = Vector2(294, 353)
-
-[node name="EnemySpawn" parent="." instance=ExtResource("5_foc04")]
-unique_name_in_owner = true
-position = Vector2(-0.912407, -20.6325)
-scale = Vector2(0.654844, 0.690831)
-enemies_left = 5
-simultaneous_enemies = 2
-
 [node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
 unique_name_in_owner = true
-enemies_left = 2
+enemies_left = 4
+simultaneous_enemies = 3
+enemy_list = Array[PackedScene]([ExtResource("5_1ny0w")])
+
+[node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
+unique_name_in_owner = true
+position = Vector2(19.8117, -59.0638)
+scale = Vector2(0.64557, 0.71298)
+enemies_left = 3
 simultaneous_enemies = 1
-Enemy = ExtResource("5_1ny0w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

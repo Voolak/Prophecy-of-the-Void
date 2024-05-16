@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyj4pf7yyxsye"]
+[gd_scene load_steps=5 format=3 uid="uid://dyj4pf7yyxsye"]
 
 [ext_resource type="Script" path="res://Scripts/OutScreenSpawnManager.gd" id="1_xtlwq"]
 [ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="2_xc4y5"]
+[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="3_kxwf7"]
 
 [sub_resource type="Curve2D" id="Curve2D_yhlli"]
 _data = {
@@ -14,7 +15,7 @@ position = Vector2(-19.5153, -20.8003)
 scale = Vector2(1.03197, 1.06371)
 curve = SubResource("Curve2D_yhlli")
 script = ExtResource("1_xtlwq")
-Enemy = ExtResource("2_xc4y5")
+enemy_list = Array[PackedScene]([ExtResource("2_xc4y5"), ExtResource("3_kxwf7")])
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 position = Vector2(3096.78, -109.097)

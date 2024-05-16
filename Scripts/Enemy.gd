@@ -5,11 +5,11 @@ extends Node2D
 @export var hp = 1
 @export var damage = 1
 @export var push_force = 18000
+@export var direction: Vector2 = Vector2.ZERO
 
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
 @onready var indicator = $Indicator
-
 
 var velocity = Vector2.ZERO
 var canWarp = false
@@ -17,6 +17,10 @@ var canWarp = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("enemies")
+
+func set_parameters(position_param: Vector2, direction_param : Vector2):
+	global_position = position_param
+	direction = direction_param
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

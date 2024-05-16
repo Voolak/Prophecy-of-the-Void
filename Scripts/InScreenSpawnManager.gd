@@ -5,7 +5,7 @@ extends Node2D
 
 @export var enemies_left : int
 @export var simultaneous_enemies : int
-@export var Enemy : PackedScene
+@export var enemy_list : Array[PackedScene] = []
 @export var spawnOffSet := 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,7 +16,7 @@ func _process(delta):
 func _on_timer_timeout():
 	for i in simultaneous_enemies:
 		if enemies_left > 0:
-			var enemy = Enemy.instantiate()
+			var enemy = enemy_list.pick_random().instantiate()
 			owner.add_child(enemy)
 			enemy.global_position = Vector2(randi_range(0+spawnOffSet, screensize.x-spawnOffSet), \
 											randi_range(0+spawnOffSet, screensize.y-spawnOffSet))
