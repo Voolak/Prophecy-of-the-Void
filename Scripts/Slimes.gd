@@ -3,6 +3,7 @@ extends Node2D
 @export var speed: float = 200
 @export var hp: int = 1
 @export var damage : int = 1
+@export var push_force = 18000
 @export var direction: Vector2 = Vector2.ZERO
 
 @onready var screensize = get_viewport_rect().size
