@@ -11,15 +11,19 @@ func _ready():
 	GlobalSignals.connect("PowerupsChoice", handlepowerupschoice)
 	
 func handlemainmenu():
+	powerup_loop.stop()
 	fight_loop.stop()
 	intro.play()
 
 func handlefighting():
 	intro_loop.stop()
 	intro.stop()
+	powerup_loop.stop()
 	fight_loop.play()
 
 func handlepowerupschoice():
+	intro.stop()
+	intro_loop.stop()
 	fight_loop.stop()
 	powerup_loop.play()
 
