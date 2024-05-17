@@ -50,9 +50,36 @@ func handleenemydies():
 			var powerup_pos_2 = Vector2(screensize.x*2/3, screensize.y/2)
 			#spawn them
 			
-			spawn_powerup(powerup_pos_1, powerup_type_enum.BULLET_RATE, powerup_attack)
+			var first_sprite
+			var second_sprite
+			
+			match first_powerup:
+				powerup_type_enum.DAMAGE:
+					first_sprite = powerup_attack
+				powerup_type_enum.PENETRATION:
+					first_sprite = powerup_penetration
+				powerup_type_enum.MV_SPD:
+					first_sprite = powerup_vitesse
+				powerup_type_enum.BULLET_RATE:
+					first_sprite = powerup_balles_cadence
+				powerup_type_enum.SHIELD_HP:
+					first_sprite = powerup_hp_bouclier
+			match random_powerup:
+				powerup_type_enum.DAMAGE:
+					second_sprite = powerup_attack
+				powerup_type_enum.PENETRATION:
+					second_sprite = powerup_penetration
+				powerup_type_enum.MV_SPD:
+					second_sprite = powerup_vitesse
+				powerup_type_enum.BULLET_RATE:
+					second_sprite = powerup_balles_cadence
+				powerup_type_enum.SHIELD_HP:
+					second_sprite = powerup_hp_bouclier
+			
+			print(first_powerup)
+			spawn_powerup(powerup_pos_1, powerup_type_enum.BULLET_RATE, first_sprite)
 			#spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
-			spawn_powerup(powerup_pos_2, powerup_type_enum.BULLET_RATE, powerup_vitesse)
+			spawn_powerup(powerup_pos_2, powerup_type_enum.BULLET_RATE, second_sprite)
 			
 
 func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, powerup_sprite: Texture):
