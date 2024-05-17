@@ -39,6 +39,8 @@ func get_input():
 	if Input.is_action_pressed("right"):
 		thrust.x += engine_power
 
+func _ready():
+	animation_player.play("RESET")
 func _physics_process(_delta):
 	get_input()
 	constant_force = thrust.rotated(rotation)
