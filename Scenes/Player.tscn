@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2i0ibutk1w5h"]
+[gd_scene load_steps=20 format=3 uid="uid://d2i0ibutk1w5h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_p5byr"]
 [ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_ugyxq"]
 [ext_resource type="PackedScene" uid="uid://dfautewc7ckgr" path="res://Scenes/Bullet.tscn" id="2_w0iyx"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="3_w3pn0"]
 [ext_resource type="Shader" path="res://Shaders/bubble.gdshader" id="5_sg4pp"]
+[ext_resource type="AudioStream" uid="uid://ddj6bf5me40nd" path="res://Assets/SFX/boxer-getting-hit.wav" id="6_v4vf8"]
+[ext_resource type="AudioStream" uid="uid://cndx3ah1sgh06" path="res://Assets/SFX/arcade-mechanical-bling.wav" id="7_tn1wv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_llfi4"]
 frequency = 0.0475
@@ -194,6 +196,14 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_h05xj")
 }
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_v4vf8")
+bus = &"SFX"
+
+[node name="ShieldBreakingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_tn1wv")
+bus = &"SFX"
 
 [connection signal="area_entered" from="CharacterSprite/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
