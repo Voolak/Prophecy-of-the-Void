@@ -3,10 +3,9 @@ extends Node2D
 
 @onready var sprite_2d = $Sprite2D
 
-@export var texture_sprite: Texture
-@export_enum("Damage", "Penetration", "Movement Speed") var powerup_type : int
+@export_enum("Damage", "Penetration", "Movement Speed", "Bullet Rate", "Shield HP") var powerup_type : int
 
-enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD}
+enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD, BULLET_RATE, SHIELD_HP}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +15,6 @@ func set_parameters(position: Vector2, powerup: powerup_type_enum, texture: Text
 	global_position = position
 	powerup_type = powerup
 	$Sprite2D.texture = texture
-	texture_sprite = texture
 	
 
 func powerup_player(player):
@@ -28,6 +26,11 @@ func powerup_player(player):
 		powerup_type_enum.MV_SPD:
 			player.engine_power += 200
 			player.rotation_speed += 1 
+		powerup_type_enum.BULLET_RATE:
+			var bulletrate = player.shooting_timer.wait_time() - 0.2
+			player.set_shooting_timer_wait_time(bulletrate)
+		powerup_type_enum.SHIELD_HP:
+			player.bubble_hp += 1
 
 func _on_hit_box_area_entered(player):
 	powerup_player(player.get_parent().get_parent())

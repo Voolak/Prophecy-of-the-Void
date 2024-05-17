@@ -9,7 +9,7 @@ extends Node2D
 @export var out_screen_spawns := 5
 @export var in_screen_spawns := 5
 
-enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD}
+enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD, BULLET_RATE, SHIELD_HP}
 var wave_index = 1
 var Powerup = preload("res://Scenes/Powerup.tscn")
 
@@ -22,6 +22,8 @@ var powerup_vitesse = preload("res://Assets/Sprites/Powerup/vitesse.png")
 
 var Slime_model = preload("res://Scenes/Slimes.tscn")
 var is_game_over = false
+
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,14 +38,20 @@ func handleenemydies():
 	if out_screen_spawn_manager.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
 		# the last enemy is still in the process of dying
 		if get_tree().get_nodes_in_group("enemies").size() == 1:
+			var random_powerup = powerup_type_enum.values().pick_random()
+			var first_powerup = random_powerup
+			while random_powerup == first_powerup:
+				# The last fruit was picked, try again until we get a different fruit.
+				random_powerup = powerup_type_enum.values().pick_random()
+			
 			GlobalSignals.emit_signal("PowerupsChoice")
 			var powerup_pos_1 = Vector2(screensize.x/3, screensize.y/2)
-			var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
-			var powerup_pos_3 = Vector2(screensize.x*2/3, screensize.y/2)
+			#var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
+			var powerup_pos_2 = Vector2(screensize.x*2/3, screensize.y/2)
 			#spawn them
-			spawn_powerup(powerup_pos_1, powerup_type_enum.DAMAGE, powerup_attack)
-			spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
-			spawn_powerup(powerup_pos_3, powerup_type_enum.MV_SPD, powerup_vitesse)
+			spawn_powerup(powerup_pos_1, first_powerup, powerup_attack)
+			#spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
+			spawn_powerup(powerup_pos_2, random_powerup, powerup_vitesse)
 			
 
 func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, powerup_sprite: Texture):

@@ -128,3 +128,6 @@ func _on_bubble_restoration_timer_timeout():
 	if bubble_hp < MAX_BUBBLE_HP && bubble_restoration_timer.is_stopped():
 		bubble_restoration_timer.start()
 
+func set_shooting_timer_wait_time(new_wait_time):
+	shooting_timer.wait_time(new_wait_time)
+
