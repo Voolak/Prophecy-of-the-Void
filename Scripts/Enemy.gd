@@ -1,5 +1,6 @@
-class_name Enemy
 extends Node2D
+
+class_name Enemy
 
 @export var speed = 200
 @export var hp = 1

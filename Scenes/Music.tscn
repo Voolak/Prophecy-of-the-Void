@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv10icud8ivcc"]
+
+[ext_resource type="Script" path="res://Scripts/Music.gd" id="1_7pt1g"]
+[ext_resource type="AudioStream" uid="uid://ds6kwj1yuv2ma" path="res://Assets/Music/Monolithic_Fight_Loop.mp3" id="1_gh4ik"]
+[ext_resource type="AudioStream" uid="uid://dyu8p0bs1h6sa" path="res://Assets/Music/Monolithic_Intro.mp3" id="3_nnkj4"]
+[ext_resource type="AudioStream" uid="uid://cs5d7k5viprrv" path="res://Assets/Music/Monolithic_Intro_Loop.mp3" id="4_qbuv2"]
+[ext_resource type="AudioStream" uid="uid://6e7f7x2qhwau" path="res://Assets/Music/Monolithic_Powerup_Loop.mp3" id="5_wl54o"]
+
+[node name="Music" type="Node"]
+process_mode = 3
+script = ExtResource("1_7pt1g")
+
+[node name="FightLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_gh4ik")
+bus = &"Music"
+
+[node name="Intro" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nnkj4")
+bus = &"Music"
+
+[node name="IntroLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qbuv2")
+bus = &"Music"
+
+[node name="PowerupLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_wl54o")
+bus = &"Music"
+
+[connection signal="finished" from="Intro" to="." method="_on_intro_finished"]

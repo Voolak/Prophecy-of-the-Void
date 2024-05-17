@@ -30,5 +30,6 @@ func powerup_player(player):
 func _on_hit_box_area_entered(player):
 	powerup_player(player.get_parent().get_parent())
 	GlobalSignals.emit_signal("PowerupTaken")
+	GlobalSignals.emit_signal("Fighting")
 	for powerup in get_tree().get_nodes_in_group("powerup"):
 		powerup.queue_free()

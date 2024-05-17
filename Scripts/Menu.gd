@@ -2,6 +2,7 @@ extends Control
 @onready var parallax_background = $ParallaxBackground
 
 func _ready():
+	GlobalSignals.emit_signal("MainMenu")
 	get_viewport().size = DisplayServer.screen_get_size()
 
 func _process(delta):

@@ -21,6 +21,7 @@ func _ready():
 	GlobalSignals.connect("EnemyDies", handleenemydies)
 	GlobalSignals.connect("PowerupTaken", handlepoweruptaken)
 	GlobalSignals.connect("SlimeMultiply", handleslimemultiply)
+	GlobalSignals.emit_signal("Fighting")
 
 func handleenemydies():
 	print("dies")
@@ -28,6 +29,7 @@ func handleenemydies():
 	if out_screen_spawn_manager.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
 		# the last enemy is still in the process of dying
 		if get_tree().get_nodes_in_group("enemies").size() == 1:
+			GlobalSignals.emit_signal("PowerupsChoice")
 			var powerup_pos_1 = Vector2(screensize.x/3, screensize.y/2)
 			var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
 			var powerup_pos_3 = Vector2(screensize.x*2/3, screensize.y/2)
@@ -47,7 +49,7 @@ func handlepoweruptaken():
 	out_screen_spawns += 1
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
-	out_screen_spawn_manager.enemies_left = out_screen_spawns 
+	out_screen_spawn_manager.enemies_left = out_screen_spawns
 
 
 func handleslimemultiply(slime_position, slime_angle):
