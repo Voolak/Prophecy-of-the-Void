@@ -5,7 +5,6 @@ signal enemydies
 @export var steer_force = 250.0
 
 @onready var player = %Player
-@onready var hurt_sound = $HurtSound
 
 func _ready():
 	add_to_group("enemies")

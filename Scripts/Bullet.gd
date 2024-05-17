@@ -7,9 +7,6 @@ var speed = 750
 
 @export var hp : int
 @export var damage : int
-@onready var hurt_sound = $HurtSound1
-@onready var hurt_sound_2 = $HurtSound2
-@onready var hurt_sound_3 = $HurtSound3
 
 
 func _ready():
@@ -30,11 +27,5 @@ func _on_timer_timeout():
 
 func _on_area_entered(enemy):
 	hp -= 1
-	if !hurt_sound.playing:
-		hurt_sound.play()
-	elif !hurt_sound_2.playing:
-		hurt_sound_2.play()
-	elif !hurt_sound_3.playing:
-		hurt_sound_3.play()
 	if hp <= 0:
 		queue_free()
