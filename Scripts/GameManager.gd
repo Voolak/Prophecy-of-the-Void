@@ -75,11 +75,10 @@ func handleenemydies():
 					second_sprite = powerup_balles_cadence
 				powerup_type_enum.SHIELD_HP:
 					second_sprite = powerup_hp_bouclier
-			
-			print(first_powerup)
-			spawn_powerup(powerup_pos_1, powerup_type_enum.BULLET_RATE, first_sprite)
+
+			spawn_powerup(powerup_pos_1, first_powerup, first_sprite)
 			#spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
-			spawn_powerup(powerup_pos_2, powerup_type_enum.BULLET_RATE, second_sprite)
+			spawn_powerup(powerup_pos_2, random_powerup, second_sprite)
 			
 
 func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, powerup_sprite: Texture):

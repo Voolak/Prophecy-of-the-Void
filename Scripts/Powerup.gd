@@ -3,7 +3,9 @@ extends Node2D
 
 @onready var sprite_2d = $Sprite2D
 
-@export_enum("Damage", "Penetration", "Movement Speed", "Bullet Rate", "Shield HP") var powerup_type : int
+@export_enum("Damage", "Penetration", "Movement Speed", "Bullet Rate", "Shield HP")
+
+var powerup_type : int
 
 enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD, BULLET_RATE, SHIELD_HP}
 
@@ -14,6 +16,7 @@ func _ready():
 func set_parameters(position: Vector2, powerup: powerup_type_enum, texture: Texture):
 	global_position = position
 	powerup_type = powerup
+	$RichTextLabel.text = "[wave amp = 50 freq=7 ][center]" + str(powerup_type_enum.keys()[powerup_type]) + "[/center][/wave]"
 	$Sprite2D.texture = texture
 	
 
