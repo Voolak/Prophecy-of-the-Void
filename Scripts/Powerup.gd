@@ -27,8 +27,8 @@ func powerup_player(player):
 			player.engine_power += 200
 			player.rotation_speed += 1 
 		powerup_type_enum.BULLET_RATE:
-			var bulletrate = player.shooting_timer.wait_time() - 0.2
-			player.set_shooting_timer_wait_time(bulletrate)
+			var bulletrate = player.shooting_timer.get_wait_time() - 0.2
+			player.shooting_timer.set_wait_time(bulletrate)
 		powerup_type_enum.SHIELD_HP:
 			player.bubble_hp += 1
 

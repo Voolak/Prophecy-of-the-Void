@@ -49,9 +49,10 @@ func handleenemydies():
 			#var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
 			var powerup_pos_2 = Vector2(screensize.x*2/3, screensize.y/2)
 			#spawn them
-			spawn_powerup(powerup_pos_1, first_powerup, powerup_attack)
+			
+			spawn_powerup(powerup_pos_1, powerup_type_enum.BULLET_RATE, powerup_attack)
 			#spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
-			spawn_powerup(powerup_pos_2, random_powerup, powerup_vitesse)
+			spawn_powerup(powerup_pos_2, powerup_type_enum.BULLET_RATE, powerup_vitesse)
 			
 
 func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, powerup_sprite: Texture):
