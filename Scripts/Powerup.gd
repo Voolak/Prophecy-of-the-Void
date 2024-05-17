@@ -15,7 +15,9 @@ func _ready():
 func set_parameters(position: Vector2, powerup: powerup_type_enum, texture: Texture):
 	global_position = position
 	powerup_type = powerup
+	$Sprite2D.texture = texture
 	texture_sprite = texture
+	
 
 func powerup_player(player):
 	match powerup_type:

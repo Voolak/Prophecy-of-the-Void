@@ -12,7 +12,14 @@ extends Node2D
 enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD}
 var wave_index = 1
 var Powerup = preload("res://Scenes/Powerup.tscn")
-var powerup_sprite_1 = preload("res://Assets/Sprites/poussin.png")
+
+#var powerup_sprite_1 = preload("res://Assets/Sprites/poussin.png")
+var powerup_attack = preload("res://Assets/Sprites/Powerup/attaque.png")
+var powerup_balles_cadence = preload("res://Assets/Sprites/Powerup/balles_cadence.png")
+var powerup_hp_bouclier = preload("res://Assets/Sprites/Powerup/hp_bouclier.png")
+var powerup_penetration = preload("res://Assets/Sprites/Powerup/penetration.png")
+var powerup_vitesse = preload("res://Assets/Sprites/Powerup/vitesse.png")
+
 var Slime_model = preload("res://Scenes/Slimes.tscn")
 var is_game_over = false
 
@@ -34,9 +41,9 @@ func handleenemydies():
 			var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
 			var powerup_pos_3 = Vector2(screensize.x*2/3, screensize.y/2)
 			#spawn them
-			spawn_powerup(powerup_pos_1, powerup_type_enum.DAMAGE, powerup_sprite_1)
-			spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_sprite_1)
-			spawn_powerup(powerup_pos_3, powerup_type_enum.MV_SPD, powerup_sprite_1)
+			spawn_powerup(powerup_pos_1, powerup_type_enum.DAMAGE, powerup_attack)
+			spawn_powerup(powerup_pos_2, powerup_type_enum.PENETRATION, powerup_penetration)
+			spawn_powerup(powerup_pos_3, powerup_type_enum.MV_SPD, powerup_vitesse)
 			
 
 func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, powerup_sprite: Texture):
