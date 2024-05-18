@@ -4,6 +4,8 @@ func _ready():
 	add_to_group("enemies")
 	animation_player.play("scaling")
 	velocity = direction.normalized()
+	if is_in_camera():
+		enable_wrap()
 
 func set_parameters(position_param: Vector2, direction_param : Vector2):
 	global_position = position_param
