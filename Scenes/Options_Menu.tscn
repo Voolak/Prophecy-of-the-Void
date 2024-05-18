@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Options_Menu.gd" id="1_vqogb"]
 [ext_resource type="Script" path="res://Scripts/VolumeSlider.gd" id="2_7kuj6"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hyy7"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_x4rvk"]
 font_size = 46
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hyy7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2yb8n"]
 font_size = 35
@@ -31,50 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 script = ExtResource("1_vqogb")
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -325.0
-offset_top = -263.0
-offset_right = 325.0
-offset_bottom = 263.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SFXLabel" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -138.5
-offset_top = 24.0
-offset_right = 138.5
-offset_bottom = 88.0
-grow_horizontal = 2
-text = "= OPTIONS ="
-label_settings = SubResource("LabelSettings_x4rvk")
-horizontal_alignment = 1
-
-[node name="Back" type="Button" parent="Panel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -158.0
-offset_right = 143.0
-offset_bottom = -39.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 35
-text = "Back"
+action_items = Array[String](["up", "left", "down", "right", "shoot", "pause"])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -90,6 +47,9 @@ offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
@@ -103,43 +63,59 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_4hyy7")
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MasterLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="SettingsGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SFXLabel2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+text = "= OPTIONS ="
+label_settings = SubResource("LabelSettings_x4rvk")
+horizontal_alignment = 1
+
+[node name="MasterLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 text = "Master Volume"
 label_settings = SubResource("LabelSettings_2yb8n")
 horizontal_alignment = 1
 
-[node name="MasterVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MasterVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("2_7kuj6")
 bus_name = "Master"
 
-[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 text = "Music Volume"
 label_settings = SubResource("LabelSettings_t5l8v")
 horizontal_alignment = 1
 
-[node name="MusicVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MusicVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("2_7kuj6")
 bus_name = "Music"
 
-[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 text = "SFX Volume"
 label_settings = SubResource("LabelSettings_w3h03")
 horizontal_alignment = 1
 
-[node name="SFXVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="SFXVolume" type="HSlider" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/SettingsGridContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("2_7kuj6")
 bus_name = "SFX"
 
-[connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
