@@ -19,7 +19,7 @@ signal death
 @export var Bullet : PackedScene
 @export var hp = 1
 @export var bubble_hp = 3
-@export var bullet_hp = 3
+@export var bullet_hp = 1
 @export var bullet_damage = 1
 
 var SHOOT_THRUST = 25000

@@ -151,7 +151,6 @@ angular_damp = 2.0
 script = ExtResource("1_p5byr")
 engine_power = 100
 Bullet = ExtResource("2_w0iyx")
-bubble_hp = 10
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_pr7im")

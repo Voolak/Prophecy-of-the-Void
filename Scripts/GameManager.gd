@@ -8,8 +8,8 @@ extends Node2D
 @onready var game_over_menu = $"../CanvasLayer/GameOverMenu"
 
 
-@export var out_screen_spawns := 5
-@export var in_screen_spawns := 5
+var out_screen_spawns := 0
+var in_screen_spawns := 0
 
 enum powerup_type_enum {DAMAGE, PENETRATION, MV_SPD, BULLET_RATE, SHIELD_HP}
 var wave_index = 1
@@ -29,18 +29,13 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	out_screen_spawns = out_screen_spawn_manager.enemies_left
+	in_screen_spawns = in_screen_spawn_manager.enemies_left
 	GlobalSignals.connect("EnemyDies", handleenemydies)
 	GlobalSignals.connect("PowerupTaken", handlepoweruptaken)
 	GlobalSignals.connect("SlimeMultiply", handleslimemultiply)
 	GlobalSignals.emit_signal("Fighting")
 
-#func _process(delta):
-	#var size = get_tree().get_nodes_in_group("enemies").size()
-	#if size != 0:
-		#print(size)
-	#else :
-		#print("left " + str(size) + " ; outspawn : " + str(out_screen_spawn_manager.enemies_left) + " ; inspawn : " + str(in_screen_spawn_manager.enemies_left))
-	
 
 func handleenemydies():
 	var ra = randf()
@@ -103,6 +98,9 @@ func handlepoweruptaken():
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
 	out_screen_spawn_manager.enemies_left = out_screen_spawns
+	if wave_index % 3 == 0:
+		in_screen_spawn_manager.simultaneous_enemies += 1
+		out_screen_spawn_manager.simultaneous_enemies += 1
 	if ScoreFile.best_wave < wave_index:
 		ScoreFile.best_wave = wave_index
 
