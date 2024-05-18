@@ -7,6 +7,7 @@ signal death
 @onready var marker_2d = $CharacterSprite/Marker2D
 @onready var character_sprite = $CharacterSprite
 @onready var bubble_sprite = $BubbleSprite
+@onready var bubble_collision_shape = $BubbleSprite/BubbleHitBox/BubbleCollisionShape
 @onready var animation_player = $AnimationPlayer
 @onready var bubble_restoration_timer = $BubbleSprite/BubbleRestorationTimer
 @onready var camera = $"../Camera2D"
@@ -41,6 +42,7 @@ func get_input():
 
 func _ready():
 	animation_player.play("RESET")
+	
 func _physics_process(_delta):
 	get_input()
 	constant_force = thrust.rotated(rotation)
@@ -97,10 +99,15 @@ func get_pushed(enemy):
 
 func _on_hit_box_area_entered(enemy):
 	get_pushed(enemy)
-	if bubble_hp == 0:
+	if bubble_hp <= 0:
 		hurt_sound.play()
 		death.emit()
 		animation_player.play("death")
+
+func reset_shield():
+	bubble_hp = MAX_BUBBLE_HP
+	bubble_sprite.visible = true
+	bubble_collision_shape.disabled = false
 
 func _on_bubble_hit_box_area_entered(enemy):
 	# lose hp and start restoration timer
@@ -115,7 +122,9 @@ func _on_bubble_hit_box_area_entered(enemy):
 		bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
 	# destroy shield if hp == 0
 	if bubble_hp == 0:
-		bubble_sprite.queue_free()
+		bubble_sprite.visible = false
+		bubble_collision_shape.disabled = true
+		
 
 
 func _on_bubble_restoration_timer_timeout():

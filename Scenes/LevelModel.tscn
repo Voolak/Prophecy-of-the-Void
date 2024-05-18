@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=19 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="4_djuon"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
-[ext_resource type="PackedScene" path="res://Scenes/UFO.tscn" id="7_i45bw"]
+[ext_resource type="PackedScene" uid="uid://d3iplc3toa6ue" path="res://Scenes/UFO.tscn" id="7_i45bw"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
+[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="9_owu36"]
+[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="9_t5cf8"]
 [ext_resource type="PackedScene" uid="uid://ck1n1xx3oeocj" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Game_Over_Menu.tscn" id="15_qxwan"]
 
@@ -59,6 +61,7 @@ position = Vector2(19.8117, -59.0638)
 scale = Vector2(0.64557, 0.71298)
 enemies_left = 5
 simultaneous_enemies = 2
+enemy_list = Array[PackedScene]([ExtResource("9_t5cf8"), ExtResource("9_owu36")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("1_rtggu")

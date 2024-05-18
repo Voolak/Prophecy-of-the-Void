@@ -5,6 +5,8 @@ extends Node2D
 @onready var player = %Player
 @onready var in_screen_spawn_manager = %InScreenSpawnManager
 @onready var out_screen_spawn_manager = %OutScreenSpawnManager
+@onready var game_over_menu = $"../CanvasLayer/GameOverMenu"
+
 
 @export var out_screen_spawns := 5
 @export var in_screen_spawns := 5
@@ -32,10 +34,20 @@ func _ready():
 	GlobalSignals.connect("SlimeMultiply", handleslimemultiply)
 	GlobalSignals.emit_signal("Fighting")
 
+#func _process(delta):
+	#var size = get_tree().get_nodes_in_group("enemies").size()
+	#if size != 0:
+		#print(size)
+	#else :
+		#print("left " + str(size) + " ; outspawn : " + str(out_screen_spawn_manager.enemies_left) + " ; inspawn : " + str(in_screen_spawn_manager.enemies_left))
+	
+
 func handleenemydies():
+	var ra = randf()
 	if out_screen_spawn_manager.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
 		# the last enemy is still in the process of dying
-		if get_tree().get_nodes_in_group("enemies").size() == 1:
+		if get_tree().get_nodes_in_group("enemies").size() <= 1:
+			print("no more enemies " + str(ra))
 			var random_powerup = powerup_type_enum.values().pick_random()
 			var first_powerup = random_powerup
 			while random_powerup == first_powerup:
@@ -85,6 +97,8 @@ func spawn_powerup(powerup_position: Vector2, powerup: powerup_type_enum, poweru
 
 
 func handlepoweruptaken():
+	player.reset_shield()
+	wave_index += 1
 	out_screen_spawns += 1
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
@@ -108,5 +122,6 @@ func handleslimemultiply(slime_position, slime_angle):
 
 func _on_player_death():
 	is_game_over = true
+	game_over_menu.set_wave(wave_index)
 	$"../CanvasLayer/GameOverMenu".visible = true
 	$"../CanvasLayer/GameOverMenu/AnimationPlayer".play("blur")
