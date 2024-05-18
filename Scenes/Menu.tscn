@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkb3x83lhud3x" path="res://Assets/Sprites/background2_elements/orange_nebula_1.png" id="4_4jk5a"]
 [ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="5_27jaw"]
 [ext_resource type="Texture2D" uid="uid://bys4g5x0i68tt" path="res://Assets/Sprites/background2_elements/purple_nebula_1.png" id="5_afuc4"]
-[ext_resource type="PackedScene" uid="uid://duxtob7mkdohc" path="res://Scenes/HowToPlay.tscn" id="7_wkfvl"]
+[ext_resource type="PackedScene" uid="uid://drq7by3yqfupm" path="res://Scenes/HowToPlay.tscn" id="7_wkfvl"]
 
 [node name="Menu" type="Control"]
 process_mode = 3
