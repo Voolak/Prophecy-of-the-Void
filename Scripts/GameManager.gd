@@ -103,6 +103,8 @@ func handlepoweruptaken():
 	in_screen_spawns += 1
 	in_screen_spawn_manager.enemies_left = in_screen_spawns
 	out_screen_spawn_manager.enemies_left = out_screen_spawns
+	if ScoreFile.best_wave < wave_index:
+		ScoreFile.best_wave = wave_index
 
 
 func handleslimemultiply(slime_position, slime_angle):

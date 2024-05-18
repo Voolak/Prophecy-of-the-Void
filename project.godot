@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalSignals="*res://Scripts/GlobalSignals.gd"
 Music="*res://Scenes/Music.tscn"
+ScoreFile="*res://Scripts/ScoreFile.gd"
 
 [display]
 
