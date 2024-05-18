@@ -21,3 +21,8 @@ func _on_options_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+
+func _on_how_to_play_pressed():
+	$HowToPlay.visible = !$HowToPlay.visible
+	$MarginContainer.visible = !$MarginContainer.visible
