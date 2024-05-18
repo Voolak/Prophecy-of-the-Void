@@ -35,3 +35,11 @@ func create_action_remap_items() -> void:
 			button.focus_neighbor_bottom = back.get_path()
 		previous_item = button
 		settings_grid_container.add_child(button)
+
+func _on_full_screen_toggle_toggled(toggled_on):
+	if toggled_on == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		var size = get_viewport().size
+		DisplayServer.window_set_size(size)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
