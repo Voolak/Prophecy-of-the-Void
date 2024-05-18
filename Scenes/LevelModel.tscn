@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bys4g5x0i68tt" path="res://Assets/Sprites/background2_elements/purple_nebula_1.png" id="3_1lg6r"]
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="3_kkc0p"]
 [ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="4_djuon"]
-[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="5_1ny0w"]
 [ext_resource type="PackedScene" uid="uid://dyj4pf7yyxsye" path="res://Scenes/OutScreenSpawnManager.tscn" id="5_foc04"]
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
+[ext_resource type="PackedScene" uid="uid://d3iplc3toa6ue" path="res://Scenes/UFO.tscn" id="7_i45bw"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
 [ext_resource type="PackedScene" uid="uid://ck1n1xx3oeocj" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Game_Over_Menu.tscn" id="15_qxwan"]
@@ -35,6 +35,7 @@ shape = SubResource("RectangleShape2D_ru7ca")
 debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
+unique_name_in_owner = true
 position = Vector2(748, 595)
 bubble_hp = 3
 bullet_hp = 2
@@ -48,16 +49,16 @@ script = ExtResource("3_kkc0p")
 
 [node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
 unique_name_in_owner = true
-enemies_left = 4
-simultaneous_enemies = 3
-enemy_list = Array[PackedScene]([ExtResource("5_1ny0w")])
+enemies_left = 2
+simultaneous_enemies = 1
+enemy_list = Array[PackedScene]([ExtResource("7_i45bw")])
 
 [node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
 unique_name_in_owner = true
 position = Vector2(19.8117, -59.0638)
 scale = Vector2(0.64557, 0.71298)
-enemies_left = 3
-simultaneous_enemies = 1
+enemies_left = 5
+simultaneous_enemies = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("1_rtggu")

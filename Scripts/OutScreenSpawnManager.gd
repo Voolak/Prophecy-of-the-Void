@@ -20,6 +20,7 @@ func _on_timer_timeout():
 			# instantiate enemies
 			var enemy = enemy_list.pick_random().instantiate()
 			owner.add_child(enemy)
+			enemy.set_owner(owner)
 			path_follow_2d.progress_ratio = randf()
 			var enemy_position = path_follow_2d.global_position
 			var enemy_direction = Vector2(screensize.x/2 - enemy_position.x, \

@@ -10,6 +10,11 @@ radius = 42.0
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_sb8q1")
+speed = null
+hp = null
+damage = null
+push_force = null
+direction = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 

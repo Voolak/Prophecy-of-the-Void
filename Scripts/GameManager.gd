@@ -33,8 +33,6 @@ func _ready():
 	GlobalSignals.emit_signal("Fighting")
 
 func handleenemydies():
-	print("dies")
-	print(get_tree().get_nodes_in_group("enemies").size())
 	if out_screen_spawn_manager.enemies_left == 0 && in_screen_spawn_manager.enemies_left == 0 :
 		# the last enemy is still in the process of dying
 		if get_tree().get_nodes_in_group("enemies").size() == 1:
@@ -49,7 +47,6 @@ func handleenemydies():
 			#var powerup_pos_2 = Vector2(screensize.x/2, screensize.y/2)
 			var powerup_pos_2 = Vector2(screensize.x*2/3, screensize.y/2)
 			#spawn them
-			
 			var first_sprite
 			var second_sprite
 			

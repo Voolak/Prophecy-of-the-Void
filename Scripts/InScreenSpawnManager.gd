@@ -18,6 +18,7 @@ func _on_timer_timeout():
 		if enemies_left > 0:
 			var enemy = enemy_list.pick_random().instantiate()
 			owner.add_child(enemy)
+			enemy.set_owner(owner)
 			enemy.global_position = Vector2(randi_range(0+spawnOffSet, screensize.x-spawnOffSet), \
 											randi_range(0+spawnOffSet, screensize.y-spawnOffSet))
 			enemies_left -= 1
