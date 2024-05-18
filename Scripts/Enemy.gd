@@ -17,6 +17,8 @@ var canWarp = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("enemies")
+	if is_in_camera():
+		enable_wrap()
 
 func set_parameters(position_param: Vector2, direction_param : Vector2):
 	global_position = position_param

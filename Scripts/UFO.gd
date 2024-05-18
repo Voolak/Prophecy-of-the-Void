@@ -10,6 +10,8 @@ func _ready():
 	add_to_group("enemies")
 	set_process(false)
 	animation_player.play("spawn_animation")
+	if is_in_camera():
+		enable_wrap()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

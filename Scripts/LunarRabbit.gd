@@ -8,6 +8,8 @@ signal enemydies
 
 func _ready():
 	add_to_group("enemies")
+	if is_in_camera():
+		enable_wrap()
 
 func seek():
 	var steer = Vector2.ZERO
