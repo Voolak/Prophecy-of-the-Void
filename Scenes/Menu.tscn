@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq8nrv5um4hy1"]
+[gd_scene load_steps=8 format=3 uid="uid://dq8nrv5um4hy1"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_722wd"]
 [ext_resource type="Texture2D" uid="uid://b2hnyjxrt4tcl" path="res://Assets/Sprites/background1.png" id="2_sabc2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkb3x83lhud3x" path="res://Assets/Sprites/background2_elements/orange_nebula_1.png" id="4_4jk5a"]
 [ext_resource type="Texture2D" uid="uid://b22w6a605iysh" path="res://Assets/Sprites/background2_elements/star_big_1.png" id="5_27jaw"]
 [ext_resource type="Texture2D" uid="uid://bys4g5x0i68tt" path="res://Assets/Sprites/background2_elements/purple_nebula_1.png" id="5_afuc4"]
+[ext_resource type="PackedScene" uid="uid://duxtob7mkdohc" path="res://Scenes/HowToPlay.tscn" id="7_wkfvl"]
 
 [node name="Menu" type="Control"]
 process_mode = 3
@@ -55,6 +56,10 @@ texture = ExtResource("5_27jaw")
 visible = false
 layout_mode = 1
 
+[node name="HowToPlay" parent="." instance=ExtResource("7_wkfvl")]
+visible = false
+layout_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -79,6 +84,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "PLAY"
 
+[node name="HowToPlay" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "TUTORIAL"
+
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
@@ -90,5 +100,6 @@ theme_override_font_sizes/font_size = 35
 text = "QUIT"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
