@@ -11,8 +11,8 @@ _data = {
 point_count = 5
 
 [node name="OutScreenSpawnManager" type="Path2D"]
-position = Vector2(-19.5153, -20.8003)
-scale = Vector2(1.03197, 1.06371)
+position = Vector2(-81.0786, -66.9887)
+scale = Vector2(0.61403, 0.64034)
 curve = SubResource("Curve2D_yhlli")
 script = ExtResource("1_xtlwq")
 enemy_list = Array[PackedScene]([ExtResource("2_xc4y5"), ExtResource("3_kxwf7")])
