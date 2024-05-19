@@ -95,8 +95,8 @@ enemy_list = Array[PackedScene]([ExtResource("7_i45bw")])
 
 [node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
 unique_name_in_owner = true
-position = Vector2(-160.952, -132.436)
-scale = Vector2(0.584158, 0.600968)
+position = Vector2(72.8204, 47.9579)
+scale = Vector2(0.466498, 0.441144)
 enemies_left = 3
 simultaneous_enemies = 1
 

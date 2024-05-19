@@ -8,11 +8,29 @@ extends Path2D
 @export var enemies_left : int
 @export var simultaneous_enemies : int
 @export var enemy_list : Array[PackedScene] = []
+@export var offset_spawn = 100
+
+enum SIDE {TOP, RIGHT, BOTTOM, LEFT}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func random_position():
+	var side = SIDE.values().pick_random()
+	match side:
+		SIDE.TOP:
+			var rand_on_side = randi_range(0, screensize.x)
+			return Vector2(rand_on_side, -offset_spawn)
+		SIDE.RIGHT:
+			var rand_on_side = randi_range(0, screensize.y)
+			return Vector2(screensize.x + offset_spawn, rand_on_side)
+		SIDE.BOTTOM:
+			var rand_on_side = randi_range(0, screensize.x)
+			return Vector2(rand_on_side, screensize.y + offset_spawn)
+		SIDE.LEFT:
+			var rand_on_side = randi_range(0, screensize.y)
+			return Vector2(-offset_spawn, rand_on_side)
 
 func _on_timer_timeout():
 	for i in simultaneous_enemies:
@@ -23,6 +41,7 @@ func _on_timer_timeout():
 			enemy.set_owner(owner)
 			path_follow_2d.progress_ratio = randf()
 			var enemy_position = path_follow_2d.global_position
+			#var enemy_position = Vector2(screensize.x + 10, screensize.y + 10)
 			var enemy_direction = Vector2(screensize.x/2 - enemy_position.x, \
 										  screensize.y/2 - enemy_position.y)
 			var offset_angle = randf_range(-PI/8, PI/8)  # degrees
