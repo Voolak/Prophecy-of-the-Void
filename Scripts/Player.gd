@@ -98,7 +98,7 @@ func get_pushed(enemy):
 	apply_central_force(enemy.get_parent().push_force * push_direction)
 
 func _on_hit_box_area_entered(enemy):
-	get_pushed(enemy)
+	#get_pushed(enemy)
 	if bubble_hp <= 0:
 		hurt_sound.play()
 		death.emit()
