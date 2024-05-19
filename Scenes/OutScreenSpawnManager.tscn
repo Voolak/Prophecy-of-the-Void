@@ -19,7 +19,7 @@ enemy_list = Array[PackedScene]([ExtResource("2_xc4y5"), ExtResource("3_kxwf7")]
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 position = Vector2(3954.33, -90.7424)
-rotation = 1.58799
+rotation = 1.588
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

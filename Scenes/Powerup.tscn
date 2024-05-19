@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqxbxdlpijesr"]
+[gd_scene load_steps=4 format=3 uid="uid://bqxbxdlpijesr"]
 
 [ext_resource type="Script" path="res://Scripts/Powerup.gd" id="1_k5epf"]
+[ext_resource type="PackedScene" uid="uid://bke86nd32i87y" path="res://Scenes/PowerupShield.tscn" id="2_4573r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktvmu"]
 radius = 38.3275
@@ -33,5 +34,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_ktvmu")
+debug_color = Color(0.55782, 0.560864, 7.70092e-07, 0.42)
+
+[node name="PowerupShield" parent="." instance=ExtResource("2_4573r")]
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
