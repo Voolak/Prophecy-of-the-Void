@@ -10,6 +10,7 @@ class_name Enemy
 @onready var screensize = get_viewport_rect().size
 @onready var animation_player = $AnimationPlayer
 @onready var indicator = $Indicator
+@onready var death_timer = $DeathTimer
 
 var velocity = Vector2.ZERO
 var canWarp = false
@@ -48,5 +49,8 @@ func display_indicator():
 func _on_hit_box_area_entered(bullet):
 	hp -= bullet.damage
 	if hp <= 0:
-		GlobalSignals.emit_signal("EnemyDies")
 		animation_player.play("death")
+		death_timer.start()
+
+func _on_death_timer_timeout():
+	GlobalSignals.emit_signal("EnemyDies", self)

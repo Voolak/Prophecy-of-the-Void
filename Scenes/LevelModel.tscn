@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cpxoccaoj1f3t"]
+[gd_scene load_steps=17 format=3 uid="uid://cpxoccaoj1f3t"]
 
 [ext_resource type="PackedScene" uid="uid://d2i0ibutk1w5h" path="res://Scenes/Player.tscn" id="1_4xv6i"]
 [ext_resource type="PackedScene" uid="uid://b7bkndo2ht4yw" path="res://Scenes/GameManager.tscn" id="1_cmnsn"]
@@ -13,8 +13,6 @@
 [ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="5_o0g1s"]
 [ext_resource type="PackedScene" uid="uid://d3iplc3toa6ue" path="res://Scenes/UFO.tscn" id="7_i45bw"]
 [ext_resource type="PackedScene" uid="uid://cqxkmie70uljv" path="res://Scenes/InScreenSpawnManager.tscn" id="8_n8rcp"]
-[ext_resource type="PackedScene" uid="uid://sfu3go1mbjcs" path="res://Scenes/LunarRabbit.tscn" id="9_owu36"]
-[ext_resource type="PackedScene" uid="uid://3216u18yillk" path="res://Scenes/Slimes.tscn" id="9_t5cf8"]
 [ext_resource type="PackedScene" uid="uid://ck1n1xx3oeocj" path="res://Scenes/Pause_Menu.tscn" id="9_v0xbx"]
 [ext_resource type="PackedScene" uid="uid://c4u75bhoaj37n" path="res://Scenes/Game_Over_Menu.tscn" id="15_qxwan"]
 
@@ -25,41 +23,6 @@ size = Vector2(1794, 959)
 
 [node name="GameManager" parent="." groups=["gamemanager"] instance=ExtResource("1_cmnsn")]
 unique_name_in_owner = true
-
-[node name="WarpZone" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("2_evsbq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
-position = Vector2(951, 536.5)
-shape = SubResource("RectangleShape2D_ru7ca")
-debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
-
-[node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
-unique_name_in_owner = true
-position = Vector2(748, 595)
-bullet_hp = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
-script = ExtResource("5_o0g1s")
-
-[node name="Enemies" type="Node" parent="."]
-script = ExtResource("3_kkc0p")
-
-[node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
-unique_name_in_owner = true
-simultaneous_enemies = 1
-enemy_list = Array[PackedScene]([ExtResource("7_i45bw")])
-
-[node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
-unique_name_in_owner = true
-position = Vector2(19.8117, -59.0638)
-scale = Vector2(0.64557, 0.71298)
-enemies_left = 3
-simultaneous_enemies = 1
-enemy_list = Array[PackedScene]([ExtResource("9_t5cf8"), ExtResource("9_owu36")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("1_rtggu")
@@ -103,6 +66,40 @@ visible = false
 
 [node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("15_qxwan")]
 visible = false
+
+[node name="WarpZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_evsbq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
+position = Vector2(951, 536.5)
+shape = SubResource("RectangleShape2D_ru7ca")
+debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
+unique_name_in_owner = true
+position = Vector2(748, 595)
+bullet_hp = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("5_o0g1s")
+
+[node name="Enemies" type="Node" parent="."]
+script = ExtResource("3_kkc0p")
+
+[node name="InScreenSpawnManager" parent="." instance=ExtResource("8_n8rcp")]
+unique_name_in_owner = true
+simultaneous_enemies = 1
+enemy_list = Array[PackedScene]([ExtResource("7_i45bw")])
+
+[node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
+unique_name_in_owner = true
+position = Vector2(-625.238, -618.067)
+scale = Vector2(0.846981, 1.03516)
+enemies_left = 3
+simultaneous_enemies = 1
 
 [connection signal="area_entered" from="WarpZone" to="WarpZone" method="_on_area_entered"]
 [connection signal="death" from="Player" to="GameManager" method="_on_player_death"]

@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_yhlli"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 3096.78, -109.097, 0, 0, 0, 0, 3093.83, 1728.43, 0, 0, 0, 0, -137.571, 1735.06, 0, 0, 0, 0, -131.653, -102.473, 0, 0, 0, 0, 3096.78, -109.097)
+"points": PackedVector2Array(0, 0, 0, 0, 3954.33, -90.7424, 0, 0, 0, 0, 3912.97, 2313.72, 0, 0, 0, 0, -147.302, 2325.31, 0, 0, 0, 0, -131.653, -102.473, 0, 0, 0, 0, 3096.78, -109.097)
 }
 point_count = 5
 
@@ -18,8 +18,8 @@ script = ExtResource("1_xtlwq")
 enemy_list = Array[PackedScene]([ExtResource("2_xc4y5"), ExtResource("3_kxwf7")])
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(3096.78, -109.097)
-rotation = 1.5724
+position = Vector2(3954.33, -90.7424)
+rotation = 1.58799
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

@@ -27,7 +27,7 @@ func _on_timer_timeout():
 										  screensize.y/2 - enemy_position.y)
 			var offset_angle = randf_range(-PI/8, PI/8)  # degrees
 			enemy_direction = Vector2.RIGHT.rotated(enemy_direction.angle() + offset_angle).normalized()
-			enemy.set_parameters(path_follow_2d.global_position, enemy_direction)
+			enemy.set_parameters(enemy_position, enemy_direction)
 			# decrease nb of enemies and disable timer if no more to spawn
 			enemies_left -= 1
 	
