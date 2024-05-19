@@ -21,11 +21,12 @@ func _physics_process(delta):
 	position += transform.x * speed * delta
 	position.x = wrapf(position.x, 0, screensize.x)
 	position.y = wrapf(position.y, 0, screensize.y)
+	if hp <= 0:
+		queue_free()
 
 func _on_timer_timeout():
 	queue_free()
 
 func _on_area_entered(enemy):
-	hp -= 1
-	if hp <= 0:
-		queue_free()
+	pass
+	

@@ -80,7 +80,6 @@ debug_color = Color(4.13924e-06, 0.64637, 0.238671, 0.42)
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4xv6i")]
 unique_name_in_owner = true
 position = Vector2(748, 595)
-bullet_hp = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -96,8 +95,8 @@ enemy_list = Array[PackedScene]([ExtResource("7_i45bw")])
 
 [node name="OutScreenSpawnManager" parent="." instance=ExtResource("5_foc04")]
 unique_name_in_owner = true
-position = Vector2(-625.238, -618.067)
-scale = Vector2(0.846981, 1.03516)
+position = Vector2(-160.952, -132.436)
+scale = Vector2(0.584158, 0.600968)
 enemies_left = 3
 simultaneous_enemies = 1
 

@@ -47,6 +47,7 @@ func display_indicator():
 
 # on bullet enter
 func _on_hit_box_area_entered(bullet):
+	bullet.hp -= 1
 	hp -= bullet.damage
 	if hp <= 0:
 		animation_player.play("death")
