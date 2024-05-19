@@ -121,7 +121,7 @@ func _on_bubble_hit_box_area_entered(enemy):
 		var current_crack_intensity = bubble_sprite.material.get_shader_parameter("crack_intensity")
 		bubble_sprite.material.set_shader_parameter("crack_intensity", current_crack_intensity + CRACK_STEP)
 	# destroy shield if hp == 0
-	if bubble_hp == 0:
+	if bubble_hp <= 0:
 		bubble_sprite.visible = false
 		bubble_collision_shape.disabled = true
 		
