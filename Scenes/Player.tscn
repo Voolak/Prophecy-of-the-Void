@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://d2i0ibutk1w5h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_p5byr"]
-[ext_resource type="Texture2D" uid="uid://bs1ex4ga6b0bl" path="res://icon.svg" id="2_ugyxq"]
 [ext_resource type="PackedScene" uid="uid://dfautewc7ckgr" path="res://Scenes/Bullet.tscn" id="2_w0iyx"]
 [ext_resource type="Shader" path="res://Shaders/dissolve.gdshader" id="3_w3pn0"]
+[ext_resource type="Texture2D" uid="uid://dkj4y1vvt5i6" path="res://Assets/Sprites/Cowboy.png" id="4_w557v"]
 [ext_resource type="Shader" path="res://Shaders/bubble.gdshader" id="5_sg4pp"]
 [ext_resource type="AudioStream" uid="uid://ddj6bf5me40nd" path="res://Assets/SFX/boxer-getting-hit.wav" id="6_v4vf8"]
 [ext_resource type="AudioStream" uid="uid://cndx3ah1sgh06" path="res://Assets/SFX/arcade-mechanical-bling.wav" id="7_tn1wv"]
@@ -24,7 +24,7 @@ shader_parameter/burn_color = Color(0.894118, 0, 0, 1)
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_2pf2x")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26naw"]
-size = Vector2(118, 118)
+size = Vector2(61.1141, 250.259)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pheb2"]
 fractal_type = 3
@@ -154,7 +154,9 @@ Bullet = ExtResource("2_w0iyx")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_pr7im")
-texture = ExtResource("2_ugyxq")
+position = Vector2(17, 3)
+scale = Vector2(0.644097, 0.571181)
+texture = ExtResource("4_w557v")
 
 [node name="Marker2D" type="Marker2D" parent="CharacterSprite"]
 position = Vector2(64, 0)
@@ -162,12 +164,12 @@ position = Vector2(64, 0)
 [node name="GunSprite" type="Sprite2D" parent="CharacterSprite/Marker2D"]
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.230469, 0.230469)
-texture = ExtResource("2_ugyxq")
 
 [node name="HitBox" type="Area2D" parent="CharacterSprite"]
 collision_mask = 4
 
 [node name="HitBoxCollisionShape" type="CollisionShape2D" parent="CharacterSprite/HitBox"]
+position = Vector2(-21.7719, -9.48456)
 shape = SubResource("RectangleShape2D_26naw")
 
 [node name="ShootingTimer" type="Timer" parent="."]
