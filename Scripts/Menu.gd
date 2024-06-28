@@ -4,6 +4,8 @@ extends Control
 func _ready():
 	GlobalSignals.emit_signal("MainMenu")
 	get_viewport().size = DisplayServer.screen_get_size()
+	$HowToPlay/MarginContainer/VBoxContainer/Back.connect("pressed",_on_how_to_play_pressed)
+	
 
 func _process(delta):
 	parallax_background.scroll_offset=get_global_mouse_position()

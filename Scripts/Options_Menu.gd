@@ -3,7 +3,7 @@ extends Control
 @export var action_items: Array[String]
 
 @onready var margin_container = $MarginContainer
-@onready var panel = $"../Panel"
+@onready var panel = $MarginContainer/Panel
 
 @onready var settings_grid_container = %SettingsGridContainer
 @onready var back = %Back
