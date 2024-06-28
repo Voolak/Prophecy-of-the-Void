@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Prophecy of the Void"
-run/main_scene="res://Scenes/Menu.tscn"
+config/name="Astro Sheriff"
+run/main_scene="res://Scenes/LevelModel.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

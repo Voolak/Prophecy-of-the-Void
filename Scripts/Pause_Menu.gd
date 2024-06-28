@@ -3,6 +3,7 @@ extends Control
 
 func _ready():
 	$AnimationPlayer.play("RESET")
+	$OptionsMenu/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Back.connect("pressed",_on_options_pressed)
 
 func resume():
 	get_tree().paused = false
